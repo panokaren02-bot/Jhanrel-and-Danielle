@@ -254,7 +254,7 @@ const BRAND = {
   monogram: "/monogram/monogram.png",
   coupleNameImage: "/Details/couple-name.png", // couple-name lettering (loader, envelope)
   seal: "/Details/seal.png", // envelope wax seal
-  backgroundMusic: "/background_music/Wedding Background Garden #wedding #fantasy #weddingbackgrounds #gardenwedding #weddingvideo.mp3",
+  backgroundMusic: "/background_music/Simoy - Rob Deniel 100 Awit Para Kay Stella (Official Lyric Video).mp3",
 }
 
 // Couple photos reused across the site (gallery, loader, reminders, snap & share, closing)
