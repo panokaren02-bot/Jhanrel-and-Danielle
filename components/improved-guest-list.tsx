@@ -15,10 +15,10 @@ const MAX_PAX = 20;
 /** Form label: readable sentence-case text with a Required / Optional tag. */
 function FieldLabel({ htmlFor, children, required = false }: { htmlFor?: string; children: React.ReactNode; required?: boolean }) {
   return (
-    <label htmlFor={htmlFor} className="flex items-center justify-between gap-2 text-[13px] font-medium text-[#304A34]">
+    <label htmlFor={htmlFor} className="flex items-center justify-between gap-2 text-[13px] font-medium text-[#2F3B57]">
       <span>{children}</span>
       {required ? (
-        <span className="rounded-full bg-[#EEF2EA] px-2 py-0.5 text-[10px] font-semibold uppercase tracking-wide text-[#4F674D]">Required</span>
+        <span className="rounded-full bg-[#EBF0F7] px-2 py-0.5 text-[10px] font-semibold uppercase tracking-wide text-[#4F6381]">Required</span>
       ) : (
         <span className="text-[10px] font-medium uppercase tracking-wide text-gray-400">Optional</span>
       )}
@@ -299,8 +299,8 @@ export const ImprovedGuestList: React.FC<ImprovedGuestListProps> = ({
     <div className="space-y-4 sm:space-y-6">
       {/* Statistics Cards */}
       <div className="grid grid-cols-2 gap-2.5 sm:gap-4 md:grid-cols-3 lg:grid-cols-6">
-        <div className="bg-white rounded-lg p-3 sm:p-4 border border-[#DDE5D4] shadow-sm">
-          <div className="text-xl sm:text-2xl font-bold text-[#4F674D]">{stats.total}</div>
+        <div className="bg-white rounded-lg p-3 sm:p-4 border border-[#DDE5F0] shadow-sm">
+          <div className="text-xl sm:text-2xl font-bold text-[#4F6381]">{stats.total}</div>
           <div className="text-[10px] sm:text-xs text-gray-500 uppercase tracking-wide">Total Invitations</div>
         </div>
         <div className="bg-green-50 rounded-lg p-3 sm:p-4 border border-green-200 shadow-sm">
@@ -332,7 +332,7 @@ export const ImprovedGuestList: React.FC<ImprovedGuestListProps> = ({
           <input 
             type="text" 
             placeholder="Search by name, role, or companion..." 
-            className="w-full pl-10 pr-4 py-2.5 border border-[#DDE5D4] rounded-lg focus:outline-none focus:ring-2 focus:ring-[#9EAF91]"
+            className="w-full pl-10 pr-4 py-2.5 border border-[#DDE5F0] rounded-lg focus:outline-none focus:ring-2 focus:ring-[#97A5BD]"
             value={searchTerm}
             onChange={(e) => setSearchTerm(e.target.value)}
           />
@@ -342,7 +342,7 @@ export const ImprovedGuestList: React.FC<ImprovedGuestListProps> = ({
           <select 
             value={statusFilter}
             onChange={(e) => setStatusFilter(e.target.value as any)}
-            className="border border-[#DDE5D4] rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-[#9EAF91] text-sm"
+            className="border border-[#DDE5F0] rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-[#97A5BD] text-sm"
           >
             <option value="all">All Status</option>
             <option value="confirmed">Confirmed</option>
@@ -353,7 +353,7 @@ export const ImprovedGuestList: React.FC<ImprovedGuestListProps> = ({
           <select 
             value={String(vipFilter)}
             onChange={(e) => setVipFilter(e.target.value === 'all' ? 'all' : e.target.value === 'true')}
-            className="border border-[#DDE5D4] rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-[#9EAF91] text-sm"
+            className="border border-[#DDE5F0] rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-[#97A5BD] text-sm"
           >
             <option value="all">All Guests</option>
             <option value="true">VIP Only</option>
@@ -364,7 +364,7 @@ export const ImprovedGuestList: React.FC<ImprovedGuestListProps> = ({
             onClick={handleExportCSV}
             variant="outline"
             size="sm"
-            className="border-[#DDE5D4] text-[#4F674D] hover:bg-[#DDE5D4]"
+            className="border-[#DDE5F0] text-[#4F6381] hover:bg-[#DDE5F0]"
           >
             <Download className="w-4 h-4 mr-2" />
             Export
@@ -372,7 +372,7 @@ export const ImprovedGuestList: React.FC<ImprovedGuestListProps> = ({
 
           <Button 
             onClick={() => { resetForm(); setShowModal(true); }}
-            className="bg-[#4F674D] text-white hover:bg-[#304A34]"
+            className="bg-[#4F6381] text-white hover:bg-[#2F3B57]"
           >
             <Plus className="w-4 h-4 mr-2" />
             Add Guest
@@ -383,13 +383,13 @@ export const ImprovedGuestList: React.FC<ImprovedGuestListProps> = ({
       {/* Guest cards (phones) */}
       <div className="space-y-3 md:hidden">
         {filteredGuests.length === 0 ? (
-          <div className="rounded-xl border border-[#DDE5D4] bg-white px-4 py-12 text-center text-gray-400">
+          <div className="rounded-xl border border-[#DDE5F0] bg-white px-4 py-12 text-center text-gray-400">
             <UsersIcon className="mx-auto mb-3 h-10 w-10 opacity-30" />
             <p className="text-sm">No guests found matching your filters</p>
           </div>
         ) : (
           filteredGuests.map(guest => (
-            <div key={guest.id} className="rounded-xl border border-[#DDE5D4] bg-white p-4 shadow-sm">
+            <div key={guest.id} className="rounded-xl border border-[#DDE5F0] bg-white p-4 shadow-sm">
               <div className="flex items-start justify-between gap-3">
                 <div className="min-w-0 flex-1">
                   <div className="flex items-center gap-1.5">
@@ -405,11 +405,11 @@ export const ImprovedGuestList: React.FC<ImprovedGuestListProps> = ({
               </div>
 
               <div className="mt-3 grid grid-cols-2 gap-2 text-xs">
-                <div className="rounded-lg bg-[#F7F9F4] px-3 py-2">
+                <div className="rounded-lg bg-[#F6F8FB] px-3 py-2">
                   <p className="text-[10px] uppercase tracking-wide text-gray-500">Pax</p>
-                  <p className="mt-0.5 font-semibold text-[#4F674D]">{guest.allowedGuests}</p>
+                  <p className="mt-0.5 font-semibold text-[#4F6381]">{guest.allowedGuests}</p>
                 </div>
-                <div className="rounded-lg bg-[#F7F9F4] px-3 py-2">
+                <div className="rounded-lg bg-[#F6F8FB] px-3 py-2">
                   <p className="text-[10px] uppercase tracking-wide text-gray-500">Table</p>
                   <p className="mt-0.5 font-semibold text-gray-700">{guest.tableNumber || 'TBD'}</p>
                 </div>
@@ -422,10 +422,10 @@ export const ImprovedGuestList: React.FC<ImprovedGuestListProps> = ({
                 </div>
               )}
 
-              <div className="mt-3 flex gap-2 border-t border-[#EEF2EA] pt-3">
+              <div className="mt-3 flex gap-2 border-t border-[#EBF0F7] pt-3">
                 <button
                   onClick={() => handleEdit(guest)}
-                  className="flex min-h-10 flex-1 items-center justify-center gap-1.5 rounded-lg border border-[#DDE5D4] text-sm font-medium text-[#304A34] transition-colors active:bg-[#F7F9F4]"
+                  className="flex min-h-10 flex-1 items-center justify-center gap-1.5 rounded-lg border border-[#DDE5F0] text-sm font-medium text-[#2F3B57] transition-colors active:bg-[#F6F8FB]"
                 >
                   <Edit2 className="h-4 w-4" />
                   Edit
@@ -445,10 +445,10 @@ export const ImprovedGuestList: React.FC<ImprovedGuestListProps> = ({
       </div>
 
       {/* Guest Table (tablet & desktop) */}
-      <div className="hidden md:block bg-white rounded-xl shadow-sm border border-[#DDE5D4] overflow-hidden">
+      <div className="hidden md:block bg-white rounded-xl shadow-sm border border-[#DDE5F0] overflow-hidden">
         <div className="overflow-x-auto">
           <table className="w-full text-left">
-            <thead className="bg-[#DDE5D4] text-[#304A34]">
+            <thead className="bg-[#DDE5F0] text-[#2F3B57]">
               <tr>
                 <th className="px-3 py-3 sm:px-6 font-semibold uppercase text-xs">Name</th>
                 <th className="px-3 py-3 sm:px-6 font-semibold uppercase text-xs">Role</th>
@@ -459,7 +459,7 @@ export const ImprovedGuestList: React.FC<ImprovedGuestListProps> = ({
                 <th className="px-3 py-3 sm:px-6 font-semibold uppercase text-xs text-right">Actions</th>
               </tr>
             </thead>
-            <tbody className="divide-y divide-[#DDE5D4]">
+            <tbody className="divide-y divide-[#DDE5F0]">
               {filteredGuests.length === 0 ? (
                 <tr>
                   <td colSpan={7} className="px-3 sm:px-6 py-12 text-center text-gray-400">
@@ -487,7 +487,7 @@ export const ImprovedGuestList: React.FC<ImprovedGuestListProps> = ({
                       {guest.contact && <div className="text-gray-500">{guest.contact}</div>}
                     </td>
                     <td className="px-3 py-3 sm:px-6 sm:py-4 text-center">
-                      <span className="text-sm font-semibold text-[#4F674D]">{guest.allowedGuests}</span>
+                      <span className="text-sm font-semibold text-[#4F6381]">{guest.allowedGuests}</span>
                     </td>
                     <td className="px-3 py-3 sm:px-6 sm:py-4 text-center">
                       <span className="px-2 py-1 bg-gray-100 rounded text-xs font-bold text-gray-600">
@@ -535,10 +535,10 @@ export const ImprovedGuestList: React.FC<ImprovedGuestListProps> = ({
           <div className="dash-sheet bg-white rounded-t-2xl sm:rounded-2xl w-full max-w-4xl max-h-[94dvh] sm:max-h-[90vh] overflow-y-auto shadow-2xl relative">
             {/* Loading Overlay */}
             {isSaving && (
-              <div className="absolute inset-0 z-50 flex items-center justify-center rounded-t-2xl bg-[#FBFCF7]/90 backdrop-blur-sm sm:rounded-2xl" role="status" aria-live="polite">
+              <div className="absolute inset-0 z-50 flex items-center justify-center rounded-t-2xl bg-[#FBFAF7]/90 backdrop-blur-sm sm:rounded-2xl" role="status" aria-live="polite">
                 <div className="text-center">
-                  <div className="mx-auto mb-4 h-12 w-12 animate-spin rounded-full border-4 border-[#DDE5D4] border-t-[#4F674D]" />
-                  <p className={`${playfair.className} text-lg font-semibold text-[#304A34]`}>
+                  <div className="mx-auto mb-4 h-12 w-12 animate-spin rounded-full border-4 border-[#DDE5F0] border-t-[#4F6381]" />
+                  <p className={`${playfair.className} text-lg font-semibold text-[#2F3B57]`}>
                     {editingGuest ? 'Saving changes…' : 'Adding guest…'}
                   </p>
                   <p className="mt-1 text-xs text-gray-500">This only takes a moment.</p>
@@ -546,7 +546,7 @@ export const ImprovedGuestList: React.FC<ImprovedGuestListProps> = ({
               </div>
             )}
 
-            <div className="sticky top-0 z-20 border-b border-[#DDE5D4] bg-[#FBFCF7]/95 px-4 pt-3 pb-4 backdrop-blur-sm sm:px-6 sm:py-5">
+            <div className="sticky top-0 z-20 border-b border-[#DDE5F0] bg-[#FBFAF7]/95 px-4 pt-3 pb-4 backdrop-blur-sm sm:px-6 sm:py-5">
               <div className="mx-auto mb-3 h-1.5 w-10 rounded-full bg-gray-300/70 sm:hidden" aria-hidden />
               <button
                 type="button"
@@ -555,7 +555,7 @@ export const ImprovedGuestList: React.FC<ImprovedGuestListProps> = ({
                 aria-expanded={showHelp}
                 aria-controls="guest-form-help"
                 className={`absolute left-3 top-3 flex h-9 w-9 items-center justify-center rounded-full border shadow-sm transition-colors sm:left-auto sm:right-16 sm:top-5 ${
-                  showHelp ? 'border-[#718566] bg-[#718566] text-white' : 'border-[#DDE5D4] bg-white text-[#4F674D] hover:bg-[#EEF2EA]'
+                  showHelp ? 'border-[#607CA6] bg-[#607CA6] text-white' : 'border-[#DDE5F0] bg-white text-[#4F6381] hover:bg-[#EBF0F7]'
                 }`}
               >
                 <Info className="h-4 w-4" />
@@ -564,22 +564,22 @@ export const ImprovedGuestList: React.FC<ImprovedGuestListProps> = ({
                 type="button"
                 onClick={() => setShowModal(false)}
                 aria-label="Close"
-                className="absolute right-3 top-3 flex h-9 w-9 items-center justify-center rounded-full border border-[#DDE5D4] bg-white text-gray-500 shadow-sm transition-colors hover:text-[#304A34] sm:right-5 sm:top-5"
+                className="absolute right-3 top-3 flex h-9 w-9 items-center justify-center rounded-full border border-[#DDE5F0] bg-white text-gray-500 shadow-sm transition-colors hover:text-[#2F3B57] sm:right-5 sm:top-5"
                 disabled={isSaving}
               >
                 <X className="h-4 w-4" />
               </button>
               <div className="px-10 text-center sm:px-0 sm:pr-24 sm:text-left">
-                <p className={`${cinzel.className} text-[10px] font-semibold uppercase tracking-[0.28em] text-[#718566]`}>
+                <p className={`${cinzel.className} text-[10px] font-semibold uppercase tracking-[0.28em] text-[#607CA6]`}>
                   Guest Invitation
                 </p>
-                <h2 className={`${playfair.className} mt-1 text-[1.45rem] font-semibold leading-tight text-[#304A34] sm:text-2xl`}>
+                <h2 className={`${playfair.className} mt-1 text-[1.45rem] font-semibold leading-tight text-[#2F3B57] sm:text-2xl`}>
                   {editingGuest ? 'Edit Invitation' : 'Create Invitation'}
                 </h2>
                 <div className="mx-auto mt-2 flex w-28 items-center gap-1.5 sm:mx-0" aria-hidden>
-                  <span className="h-px flex-1 bg-gradient-to-r from-transparent to-[#AAB9A0] sm:from-[#AAB9A0] sm:to-[#AAB9A0]/40" />
-                  <span className="h-1 w-1 rotate-45 bg-[#718566]" />
-                  <span className="h-px flex-1 bg-gradient-to-l from-transparent to-[#AAB9A0] sm:hidden" />
+                  <span className="h-px flex-1 bg-gradient-to-r from-transparent to-[#AFBED7] sm:from-[#AFBED7] sm:to-[#AFBED7]/40" />
+                  <span className="h-1 w-1 rotate-45 bg-[#607CA6]" />
+                  <span className="h-px flex-1 bg-gradient-to-l from-transparent to-[#AFBED7] sm:hidden" />
                 </div>
                 <p className="mx-auto mt-2 max-w-xs text-[11px] leading-relaxed text-gray-500 sm:mx-0 sm:max-w-none sm:text-xs">
                   {editingGuest ? 'Update seating, or correct details the guest asked you to change.' : 'Add a guest so they can find their name and RSVP on your invitation.'}
@@ -590,15 +590,15 @@ export const ImprovedGuestList: React.FC<ImprovedGuestListProps> = ({
             <form onSubmit={handleSubmit} className="px-4 pt-4 sm:p-6 space-y-4 sm:space-y-6">
               {/* How it works — opens from the ⓘ button in the header */}
               {showHelp && (
-                <div id="guest-form-help" className="rounded-xl border border-[#DDE5D4] bg-[#F7F9F4] px-3.5 py-3 text-[12px] leading-relaxed text-[#4B5B49] sm:text-[13px]">
-                  <p className="font-semibold text-[#304A34]">
-                    Adding <span className="text-[#4F674D]">{formName.trim() || 'a guest'}</span> makes their name searchable on your invitation.
+                <div id="guest-form-help" className="rounded-xl border border-[#DDE5F0] bg-[#F6F8FB] px-3.5 py-3 text-[12px] leading-relaxed text-[#4F6381] sm:text-[13px]">
+                  <p className="font-semibold text-[#2F3B57]">
+                    Adding <span className="text-[#4F6381]">{formName.trim() || 'a guest'}</span> makes their name searchable on your invitation.
                   </p>
                   <ul className="mt-1.5 space-y-1">
-                    <li className="flex gap-2"><Check className="mt-0.5 h-3.5 w-3.5 shrink-0 text-[#718566]" />They search their name in the RSVP section and confirm if they can attend.</li>
-                    <li className="flex gap-2"><Check className="mt-0.5 h-3.5 w-3.5 shrink-0 text-[#718566]" />They add their own phone, email, companions and message.</li>
-                    <li className="flex gap-2"><Check className="mt-0.5 h-3.5 w-3.5 shrink-0 text-[#718566]" />Allowed guests = seats they can confirm, including themselves.</li>
-                    <li className="flex gap-2"><Check className="mt-0.5 h-3.5 w-3.5 shrink-0 text-[#718566]" />Table shows on &quot;Find your table&quot; and the Book of Guests.</li>
+                    <li className="flex gap-2"><Check className="mt-0.5 h-3.5 w-3.5 shrink-0 text-[#607CA6]" />They search their name in the RSVP section and confirm if they can attend.</li>
+                    <li className="flex gap-2"><Check className="mt-0.5 h-3.5 w-3.5 shrink-0 text-[#607CA6]" />They add their own phone, email, companions and message.</li>
+                    <li className="flex gap-2"><Check className="mt-0.5 h-3.5 w-3.5 shrink-0 text-[#607CA6]" />Allowed guests = seats they can confirm, including themselves.</li>
+                    <li className="flex gap-2"><Check className="mt-0.5 h-3.5 w-3.5 shrink-0 text-[#607CA6]" />Table shows on &quot;Find your table&quot; and the Book of Guests.</li>
                   </ul>
                 </div>
               )}
@@ -606,8 +606,8 @@ export const ImprovedGuestList: React.FC<ImprovedGuestListProps> = ({
               <div className="grid grid-cols-1 lg:grid-cols-2 gap-5 sm:gap-6">
                 {/* Primary Guest Section */}
                 <div className="space-y-4">
-                  <h3 className={`${cinzel.className} flex items-center gap-2 border-b border-[#DDE5D4] pb-2 text-[11px] font-semibold uppercase tracking-[0.16em] text-[#4F674D] sm:text-xs`}>
-                    <span className="flex h-6 w-6 items-center justify-center rounded-full bg-[#EEF2EA]"><UserRound className="h-3.5 w-3.5" /></span>
+                  <h3 className={`${cinzel.className} flex items-center gap-2 border-b border-[#DDE5F0] pb-2 text-[11px] font-semibold uppercase tracking-[0.16em] text-[#4F6381] sm:text-xs`}>
+                    <span className="flex h-6 w-6 items-center justify-center rounded-full bg-[#EBF0F7]"><UserRound className="h-3.5 w-3.5" /></span>
                     Guest Details
                   </h3>
                   <div className="space-y-3">
@@ -621,7 +621,7 @@ export const ImprovedGuestList: React.FC<ImprovedGuestListProps> = ({
                         onChange={e => setFormName(e.target.value)} 
                         type="text" 
                         placeholder="e.g., Maria Santos"
-                        className="w-full border border-[#DDE5D4] rounded-xl bg-[#FCFDFB] px-3 py-2.5 transition-colors focus:bg-white focus:border-[#9EAF91] focus:ring-2 focus:ring-[#9EAF91]/40 outline-none" 
+                        className="w-full border border-[#DDE5F0] rounded-xl bg-[#FBFAF7] px-3 py-2.5 transition-colors focus:bg-white focus:border-[#97A5BD] focus:ring-2 focus:ring-[#97A5BD]/40 outline-none" 
                       />
                     </div>
                     <div className="space-y-1">
@@ -632,7 +632,7 @@ export const ImprovedGuestList: React.FC<ImprovedGuestListProps> = ({
                         onChange={e => setFormRole(e.target.value)} 
                         type="text" 
                         placeholder="e.g., Friend, Family, Colleague"
-                        className="w-full border border-[#DDE5D4] rounded-xl bg-[#FCFDFB] px-3 py-2.5 transition-colors focus:bg-white focus:border-[#9EAF91] focus:ring-2 focus:ring-[#9EAF91]/40 outline-none" 
+                        className="w-full border border-[#DDE5F0] rounded-xl bg-[#FBFAF7] px-3 py-2.5 transition-colors focus:bg-white focus:border-[#97A5BD] focus:ring-2 focus:ring-[#97A5BD]/40 outline-none" 
                       />
                     </div>
                     <div className="space-y-1">
@@ -643,7 +643,7 @@ export const ImprovedGuestList: React.FC<ImprovedGuestListProps> = ({
                         onChange={e => setFormAddedBy(e.target.value)} 
                         type="text" 
                         placeholder="e.g., Bride, Groom, Family"
-                        className="w-full border border-[#DDE5D4] rounded-xl bg-[#FCFDFB] px-3 py-2.5 transition-colors focus:bg-white focus:border-[#9EAF91] focus:ring-2 focus:ring-[#9EAF91]/40 outline-none" 
+                        className="w-full border border-[#DDE5F0] rounded-xl bg-[#FBFAF7] px-3 py-2.5 transition-colors focus:bg-white focus:border-[#97A5BD] focus:ring-2 focus:ring-[#97A5BD]/40 outline-none" 
                       />
                     </div>
                   </div>
@@ -653,21 +653,21 @@ export const ImprovedGuestList: React.FC<ImprovedGuestListProps> = ({
                     (email, contact, RSVP status and message come from the guest's own RSVP on the site,
                     so they aren't edited here — existing values are kept when saving) */}
                 <div className="space-y-4">
-                  <h3 className={`${cinzel.className} flex items-center gap-2 border-b border-[#DDE5D4] pb-2 text-[11px] font-semibold uppercase tracking-[0.16em] text-[#4F674D] sm:text-xs`}>
-                    <span className="flex h-6 w-6 items-center justify-center rounded-full bg-[#EEF2EA]"><CalendarCheck className="h-3.5 w-3.5" /></span>
+                  <h3 className={`${cinzel.className} flex items-center gap-2 border-b border-[#DDE5F0] pb-2 text-[11px] font-semibold uppercase tracking-[0.16em] text-[#4F6381] sm:text-xs`}>
+                    <span className="flex h-6 w-6 items-center justify-center rounded-full bg-[#EBF0F7]"><CalendarCheck className="h-3.5 w-3.5" /></span>
                     Seating & Invitation
                   </h3>
                   <div className="space-y-3">
                     <div className="space-y-1">
                       <FieldLabel htmlFor="allowed-pax" required>Allowed guests</FieldLabel>
                       {/* Stepper: − count + */}
-                      <div className="flex items-stretch overflow-hidden rounded-xl border border-[#DDE5D4] bg-[#FCFDFB] focus-within:border-[#9EAF91] focus-within:ring-2 focus-within:ring-[#9EAF91]/40">
+                      <div className="flex items-stretch overflow-hidden rounded-xl border border-[#DDE5F0] bg-[#FBFAF7] focus-within:border-[#97A5BD] focus-within:ring-2 focus-within:ring-[#97A5BD]/40">
                         <button
                           type="button"
                           onClick={() => setFormAllowedGuests(n => Math.max(MIN_PAX, n - 1))}
                           disabled={formAllowedGuests <= MIN_PAX}
                           aria-label="Decrease allowed pax"
-                          className="flex w-12 shrink-0 items-center justify-center border-r border-[#DDE5D4] text-[#4F674D] transition-colors hover:bg-[#EEF2EA] active:bg-[#DDE5D4] disabled:cursor-not-allowed disabled:text-gray-300 disabled:hover:bg-transparent"
+                          className="flex w-12 shrink-0 items-center justify-center border-r border-[#DDE5F0] text-[#4F6381] transition-colors hover:bg-[#EBF0F7] active:bg-[#DDE5F0] disabled:cursor-not-allowed disabled:text-gray-300 disabled:hover:bg-transparent"
                         >
                           <Minus className="h-4 w-4" />
                         </button>
@@ -683,7 +683,7 @@ export const ImprovedGuestList: React.FC<ImprovedGuestListProps> = ({
                               const n = parseInt(e.target.value)
                               setFormAllowedGuests(Number.isNaN(n) ? MIN_PAX : Math.min(MAX_PAX, Math.max(MIN_PAX, n)))
                             }}
-                            className="dash-stepper-input w-16 bg-transparent text-center text-xl font-bold leading-none text-[#304A34] outline-none [appearance:textfield] [&::-webkit-inner-spin-button]:appearance-none [&::-webkit-outer-spin-button]:appearance-none"
+                            className="dash-stepper-input w-16 bg-transparent text-center text-xl font-bold leading-none text-[#2F3B57] outline-none [appearance:textfield] [&::-webkit-inner-spin-button]:appearance-none [&::-webkit-outer-spin-button]:appearance-none"
                           />
                           <span className="mt-0.5 text-[10px] font-medium uppercase tracking-wide text-gray-400">
                             {formAllowedGuests === 1 ? 'guest' : 'guests'}
@@ -694,7 +694,7 @@ export const ImprovedGuestList: React.FC<ImprovedGuestListProps> = ({
                           onClick={() => setFormAllowedGuests(n => Math.min(MAX_PAX, n + 1))}
                           disabled={formAllowedGuests >= MAX_PAX}
                           aria-label="Increase allowed pax"
-                          className="flex w-12 shrink-0 items-center justify-center border-l border-[#DDE5D4] text-[#4F674D] transition-colors hover:bg-[#EEF2EA] active:bg-[#DDE5D4] disabled:cursor-not-allowed disabled:text-gray-300 disabled:hover:bg-transparent"
+                          className="flex w-12 shrink-0 items-center justify-center border-l border-[#DDE5F0] text-[#4F6381] transition-colors hover:bg-[#EBF0F7] active:bg-[#DDE5F0] disabled:cursor-not-allowed disabled:text-gray-300 disabled:hover:bg-transparent"
                         >
                           <Plus className="h-4 w-4" />
                         </button>
@@ -709,18 +709,18 @@ export const ImprovedGuestList: React.FC<ImprovedGuestListProps> = ({
                           onChange={e => setFormTable(e.target.value)} 
                           type="text" 
                           placeholder="e.g., 5 or VIP-A"
-                          className="w-full border border-[#DDE5D4] rounded-xl bg-[#FCFDFB] px-3 py-2.5 transition-colors focus:bg-white focus:border-[#9EAF91] focus:ring-2 focus:ring-[#9EAF91]/40 outline-none" 
+                          className="w-full border border-[#DDE5F0] rounded-xl bg-[#FBFAF7] px-3 py-2.5 transition-colors focus:bg-white focus:border-[#97A5BD] focus:ring-2 focus:ring-[#97A5BD]/40 outline-none" 
                         />
                       </div>
                       <div className="space-y-1">
-                        <span className="flex items-center justify-between gap-2 text-[13px] font-medium text-[#304A34]">
+                        <span className="flex items-center justify-between gap-2 text-[13px] font-medium text-[#2F3B57]">
                           <span>Guest type</span>
                           <span className="text-[10px] font-medium uppercase tracking-wide text-gray-400">Optional</span>
                         </span>
                         <label
                           htmlFor="vip-check"
                           className={`flex cursor-pointer items-center justify-center gap-2 rounded-xl border px-3 py-2.5 text-sm font-semibold leading-normal transition-colors ${
-                            formIsVip ? 'border-amber-300 bg-amber-50 text-amber-700' : 'border-[#DDE5D4] bg-[#FCFDFB] text-[#304A34]'
+                            formIsVip ? 'border-amber-300 bg-amber-50 text-amber-700' : 'border-[#DDE5F0] bg-[#FBFAF7] text-[#2F3B57]'
                           }`}
                         >
                           <input
@@ -742,10 +742,10 @@ export const ImprovedGuestList: React.FC<ImprovedGuestListProps> = ({
               {/* Guest's RSVP response — only when editing, so the couple can fix details
                   a guest asks them to correct. New invitations leave these to the guest. */}
               {editingGuest && (
-                <div className="space-y-4 rounded-2xl border border-[#DDE5D4] bg-[#FBFCF7] p-3.5 sm:p-5">
+                <div className="space-y-4 rounded-2xl border border-[#DDE5F0] bg-[#FBFAF7] p-3.5 sm:p-5">
                   <div>
-                    <h3 className={`${cinzel.className} flex items-center gap-2 text-[11px] font-semibold uppercase tracking-[0.16em] text-[#4F674D] sm:text-xs`}>
-                      <span className="flex h-6 w-6 items-center justify-center rounded-full bg-white ring-1 ring-[#DDE5D4]"><MessageSquareText className="h-3.5 w-3.5" /></span>
+                    <h3 className={`${cinzel.className} flex items-center gap-2 text-[11px] font-semibold uppercase tracking-[0.16em] text-[#4F6381] sm:text-xs`}>
+                      <span className="flex h-6 w-6 items-center justify-center rounded-full bg-white ring-1 ring-[#DDE5F0]"><MessageSquareText className="h-3.5 w-3.5" /></span>
                       Guest&apos;s RSVP Response
                     </h3>
                     <p className="mt-1.5 text-[11px] leading-snug text-gray-500 sm:text-xs">
@@ -769,7 +769,7 @@ export const ImprovedGuestList: React.FC<ImprovedGuestListProps> = ({
                             aria-checked={formStatus === opt.value}
                             onClick={() => setFormStatus(opt.value)}
                             className={`rounded-xl border px-2 py-2.5 text-xs font-semibold transition-colors sm:text-sm ${
-                              formStatus === opt.value ? opt.active : 'border-[#DDE5D4] bg-white text-gray-500 hover:text-[#304A34]'
+                              formStatus === opt.value ? opt.active : 'border-[#DDE5F0] bg-white text-gray-500 hover:text-[#2F3B57]'
                             }`}
                           >
                             {opt.label}
@@ -785,7 +785,7 @@ export const ImprovedGuestList: React.FC<ImprovedGuestListProps> = ({
                         value={formContact}
                         onChange={e => setFormContact(e.target.value)}
                         placeholder="09XX XXX XXXX"
-                        className="w-full border border-[#DDE5D4] rounded-xl bg-[#FCFDFB] px-3 py-2.5 transition-colors focus:bg-white focus:border-[#9EAF91] focus:ring-2 focus:ring-[#9EAF91]/40 outline-none"
+                        className="w-full border border-[#DDE5F0] rounded-xl bg-[#FBFAF7] px-3 py-2.5 transition-colors focus:bg-white focus:border-[#97A5BD] focus:ring-2 focus:ring-[#97A5BD]/40 outline-none"
                       />
                     </div>
                     <div className="space-y-1">
@@ -796,14 +796,14 @@ export const ImprovedGuestList: React.FC<ImprovedGuestListProps> = ({
                         value={formEmail === 'Pending' ? '' : formEmail}
                         onChange={e => setFormEmail(e.target.value)}
                         placeholder="name@example.com"
-                        className="w-full border border-[#DDE5D4] rounded-xl bg-[#FCFDFB] px-3 py-2.5 transition-colors focus:bg-white focus:border-[#9EAF91] focus:ring-2 focus:ring-[#9EAF91]/40 outline-none"
+                        className="w-full border border-[#DDE5F0] rounded-xl bg-[#FBFAF7] px-3 py-2.5 transition-colors focus:bg-white focus:border-[#97A5BD] focus:ring-2 focus:ring-[#97A5BD]/40 outline-none"
                       />
                     </div>
                   </div>
 
                   {formCompanions.length > 0 && (
                     <div className="space-y-2">
-                      <p className="flex items-center justify-between text-[13px] font-medium text-[#304A34]">
+                      <p className="flex items-center justify-between text-[13px] font-medium text-[#2F3B57]">
                         <span>Companions</span>
                         <span className="text-[10px] font-medium uppercase tracking-wide text-gray-400">
                           {formCompanions.filter(c => c.name.trim()).length} of {formCompanions.length} named
@@ -811,7 +811,7 @@ export const ImprovedGuestList: React.FC<ImprovedGuestListProps> = ({
                       </p>
                       {formCompanions.map((comp, idx) => (
                         <div key={idx} className="grid grid-cols-[1.75rem_1fr] gap-2 sm:grid-cols-[1.75rem_1fr_1fr]">
-                          <span className="row-span-2 mt-2.5 flex h-6 w-6 items-center justify-center rounded-full bg-white text-[11px] font-semibold text-[#4F674D] ring-1 ring-[#DDE5D4] sm:row-span-1">
+                          <span className="row-span-2 mt-2.5 flex h-6 w-6 items-center justify-center rounded-full bg-white text-[11px] font-semibold text-[#4F6381] ring-1 ring-[#DDE5F0] sm:row-span-1">
                             {idx + 2}
                           </span>
                           <input
@@ -819,14 +819,14 @@ export const ImprovedGuestList: React.FC<ImprovedGuestListProps> = ({
                             value={comp.name}
                             onChange={e => handleCompanionChange(idx, 'name', e.target.value)}
                             placeholder="Full name"
-                            className="w-full border border-[#DDE5D4] rounded-xl bg-[#FCFDFB] px-3 py-2.5 transition-colors focus:bg-white focus:border-[#9EAF91] focus:ring-2 focus:ring-[#9EAF91]/40 outline-none"
+                            className="w-full border border-[#DDE5F0] rounded-xl bg-[#FBFAF7] px-3 py-2.5 transition-colors focus:bg-white focus:border-[#97A5BD] focus:ring-2 focus:ring-[#97A5BD]/40 outline-none"
                           />
                           <input
                             aria-label={`Guest ${idx + 2} relationship`}
                             value={comp.relationship}
                             onChange={e => handleCompanionChange(idx, 'relationship', e.target.value)}
                             placeholder="Relationship"
-                            className="w-full border border-[#DDE5D4] rounded-xl bg-[#FCFDFB] px-3 py-2.5 transition-colors focus:bg-white focus:border-[#9EAF91] focus:ring-2 focus:ring-[#9EAF91]/40 outline-none"
+                            className="w-full border border-[#DDE5F0] rounded-xl bg-[#FBFAF7] px-3 py-2.5 transition-colors focus:bg-white focus:border-[#97A5BD] focus:ring-2 focus:ring-[#97A5BD]/40 outline-none"
                           />
                         </div>
                       ))}
@@ -841,26 +841,26 @@ export const ImprovedGuestList: React.FC<ImprovedGuestListProps> = ({
                       value={formMessage}
                       onChange={e => setFormMessage(e.target.value)}
                       placeholder="No message yet"
-                      className="w-full border border-[#DDE5D4] rounded-xl bg-[#FCFDFB] px-3 py-2.5 transition-colors focus:bg-white focus:border-[#9EAF91] focus:ring-2 focus:ring-[#9EAF91]/40 outline-none resize-none"
+                      className="w-full border border-[#DDE5F0] rounded-xl bg-[#FBFAF7] px-3 py-2.5 transition-colors focus:bg-white focus:border-[#97A5BD] focus:ring-2 focus:ring-[#97A5BD]/40 outline-none resize-none"
                     />
                   </div>
                 </div>
               )}
 
               {/* Action Buttons */}
-              <div className="sticky bottom-0 z-10 -mx-4 flex flex-col-reverse gap-2 border-t border-[#DDE5D4] bg-white px-4 pt-4 pb-[max(1rem,env(safe-area-inset-bottom))] sm:static sm:mx-0 sm:flex-row sm:justify-end sm:gap-3 sm:px-0 sm:pt-6 sm:pb-0">
+              <div className="sticky bottom-0 z-10 -mx-4 flex flex-col-reverse gap-2 border-t border-[#DDE5F0] bg-white px-4 pt-4 pb-[max(1rem,env(safe-area-inset-bottom))] sm:static sm:mx-0 sm:flex-row sm:justify-end sm:gap-3 sm:px-0 sm:pt-6 sm:pb-0">
                 <Button 
                   type="button" 
                   onClick={() => { setShowModal(false); resetForm(); }}
                   variant="outline"
-                  className="h-11 w-full rounded-full border-[#DDE5D4] px-7 text-sm font-medium text-gray-600 hover:bg-[#F7F9F4] hover:text-[#304A34] sm:w-auto"
+                  className="h-11 w-full rounded-full border-[#DDE5F0] px-7 text-sm font-medium text-gray-600 hover:bg-[#F6F8FB] hover:text-[#2F3B57] sm:w-auto"
                   disabled={isSaving}
                 >
                   Cancel
                 </Button>
                 <Button 
                   type="submit" 
-                  className="h-11 w-full rounded-full px-8 text-sm font-semibold tracking-wide bg-gradient-to-r from-[#4F674D] to-[#304A34] text-white shadow-[0_10px_22px_-10px_rgba(48,74,52,0.7)] transition-all hover:brightness-110 active:scale-[0.99] disabled:opacity-50 disabled:cursor-not-allowed sm:w-auto"
+                  className="h-11 w-full rounded-full px-8 text-sm font-semibold tracking-wide bg-gradient-to-r from-[#4F6381] to-[#2F3B57] text-white shadow-[0_10px_22px_-10px_rgba(47,59,87,0.7)] transition-all hover:brightness-110 active:scale-[0.99] disabled:opacity-50 disabled:cursor-not-allowed sm:w-auto"
                   disabled={isSaving}
                 >
                   {isSaving ? (
@@ -889,7 +889,7 @@ export const ImprovedGuestList: React.FC<ImprovedGuestListProps> = ({
       {/* Delete confirmation */}
       {guestToDelete && (
         <div
-          className="fixed inset-0 z-50 flex items-end justify-center bg-[#1F2A1E]/45 p-0 backdrop-blur-[2px] sm:items-center sm:p-4"
+          className="fixed inset-0 z-50 flex items-end justify-center bg-[#1E2638]/45 p-0 backdrop-blur-[2px] sm:items-center sm:p-4"
           role="alertdialog"
           aria-modal="true"
           aria-labelledby="delete-guest-title"
@@ -897,7 +897,7 @@ export const ImprovedGuestList: React.FC<ImprovedGuestListProps> = ({
           onClick={() => setGuestToDelete(null)}
         >
           <div
-            className="dash-sheet w-full max-w-sm overflow-hidden rounded-t-3xl border border-[#E8DCDC] bg-[#FBFCF7] shadow-[0_30px_60px_-25px_rgba(31,42,30,0.55)] sm:rounded-3xl"
+            className="dash-sheet w-full max-w-sm overflow-hidden rounded-t-3xl border border-[#E8DCDC] bg-[#FBFAF7] shadow-[0_30px_60px_-25px_rgba(30,38,56,0.55)] sm:rounded-3xl"
             onClick={e => e.stopPropagation()}
           >
             <div className="px-6 pt-4 pb-6 text-center sm:pt-7">
@@ -908,12 +908,12 @@ export const ImprovedGuestList: React.FC<ImprovedGuestListProps> = ({
               <p className={`${cinzel.className} mt-4 text-[10px] font-semibold uppercase tracking-[0.3em] text-[#A04A4A]/80`}>
                 Remove guest
               </p>
-              <h3 id="delete-guest-title" className={`${playfair.className} mt-1 text-[1.4rem] font-semibold leading-tight text-[#304A34]`}>
+              <h3 id="delete-guest-title" className={`${playfair.className} mt-1 text-[1.4rem] font-semibold leading-tight text-[#2F3B57]`}>
                 Delete this invitation?
               </h3>
 
-              <div className="mx-auto mt-4 max-w-[17rem] rounded-2xl border border-[#DDE5D4] bg-white px-4 py-3">
-                <p className={`${playfair.className} flex items-center justify-center gap-1.5 text-base font-semibold text-[#304A34] [overflow-wrap:anywhere]`}>
+              <div className="mx-auto mt-4 max-w-[17rem] rounded-2xl border border-[#DDE5F0] bg-white px-4 py-3">
+                <p className={`${playfair.className} flex items-center justify-center gap-1.5 text-base font-semibold text-[#2F3B57] [overflow-wrap:anywhere]`}>
                   {guestToDelete.isVip && <Star className="h-4 w-4 shrink-0 fill-amber-500 text-amber-500" />}
                   {guestToDelete.name}
                 </p>
@@ -934,7 +934,7 @@ export const ImprovedGuestList: React.FC<ImprovedGuestListProps> = ({
                   variant="outline"
                   autoFocus
                   onClick={() => setGuestToDelete(null)}
-                  className="h-11 w-full rounded-full border-[#DDE5D4] bg-white text-sm font-medium text-[#304A34] hover:bg-[#F7F9F4] sm:flex-1"
+                  className="h-11 w-full rounded-full border-[#DDE5F0] bg-white text-sm font-medium text-[#2F3B57] hover:bg-[#F6F8FB] sm:flex-1"
                 >
                   Keep Guest
                 </Button>
@@ -960,14 +960,14 @@ export const ImprovedGuestList: React.FC<ImprovedGuestListProps> = ({
         const eyebrow = isDelete ? 'Guest list updated' : isEdit ? 'Invitation updated' : 'Invitation ready';
         return (
           <div
-            className="fixed inset-0 z-50 flex items-center justify-center bg-[#1F2A1E]/45 p-4 backdrop-blur-[2px]"
+            className="fixed inset-0 z-50 flex items-center justify-center bg-[#1E2638]/45 p-4 backdrop-blur-[2px]"
             role="dialog"
             aria-modal="true"
             aria-labelledby="guest-success-title"
           >
-            <div className="dash-pop relative w-full max-w-sm overflow-hidden rounded-3xl border border-[#DDE5D4] bg-[#FBFCF7] shadow-[0_30px_60px_-25px_rgba(31,42,30,0.55)]">
+            <div className="dash-pop relative w-full max-w-sm overflow-hidden rounded-3xl border border-[#DDE5F0] bg-[#FBFAF7] shadow-[0_30px_60px_-25px_rgba(30,38,56,0.55)]">
               {/* Header band */}
-              <div className="relative overflow-hidden bg-gradient-to-br from-[#718566] via-[#4F674D] to-[#304A34] px-6 pt-7 pb-12 text-center">
+              <div className="relative overflow-hidden bg-gradient-to-br from-[#607CA6] via-[#4F6381] to-[#2F3B57] px-6 pt-7 pb-12 text-center">
                 <span className="pointer-events-none absolute -left-10 -top-10 h-32 w-32 rounded-full bg-white/10" aria-hidden />
                 <span className="pointer-events-none absolute -right-8 top-6 h-20 w-20 rounded-full bg-white/10" aria-hidden />
                 <p className={`${cinzel.className} relative text-[10px] font-semibold uppercase tracking-[0.3em] text-white/75`}>
@@ -980,21 +980,21 @@ export const ImprovedGuestList: React.FC<ImprovedGuestListProps> = ({
 
               {/* Badge overlapping the band */}
               <div className="relative -mt-9 flex justify-center">
-                <span className="dash-pop-badge flex h-[4.5rem] w-[4.5rem] items-center justify-center rounded-full border-4 border-[#FBFCF7] bg-white shadow-lg">
-                  <span className={`flex h-12 w-12 items-center justify-center rounded-full ${isDelete ? 'bg-[#F3EAEA] text-[#9B4C4C]' : 'bg-[#EEF2EA] text-[#4F674D]'}`}>
+                <span className="dash-pop-badge flex h-[4.5rem] w-[4.5rem] items-center justify-center rounded-full border-4 border-[#FBFAF7] bg-white shadow-lg">
+                  <span className={`flex h-12 w-12 items-center justify-center rounded-full ${isDelete ? 'bg-[#F3EAEA] text-[#9B4C4C]' : 'bg-[#EBF0F7] text-[#4F6381]'}`}>
                     {isDelete ? <Trash2 className="h-6 w-6" /> : <Check className="h-7 w-7" strokeWidth={2.5} />}
                   </span>
                 </span>
               </div>
 
               <div className="px-6 pt-4 pb-6 text-center">
-                <p className={`${playfair.className} text-lg font-semibold text-[#304A34] [overflow-wrap:anywhere]`}>
+                <p className={`${playfair.className} text-lg font-semibold text-[#2F3B57] [overflow-wrap:anywhere]`}>
                   {savedGuestName}
                 </p>
                 <div className="mx-auto mt-2 flex w-24 items-center gap-1.5" aria-hidden>
-                  <span className="h-px flex-1 bg-gradient-to-r from-transparent to-[#AAB9A0]" />
-                  <span className="h-1 w-1 rotate-45 bg-[#718566]" />
-                  <span className="h-px flex-1 bg-gradient-to-l from-transparent to-[#AAB9A0]" />
+                  <span className="h-px flex-1 bg-gradient-to-r from-transparent to-[#AFBED7]" />
+                  <span className="h-1 w-1 rotate-45 bg-[#607CA6]" />
+                  <span className="h-px flex-1 bg-gradient-to-l from-transparent to-[#AFBED7]" />
                 </div>
                 <p className="mx-auto mt-3 max-w-[17rem] text-sm leading-relaxed text-gray-600">
                   {isDelete
@@ -1007,7 +1007,7 @@ export const ImprovedGuestList: React.FC<ImprovedGuestListProps> = ({
                 <div className="mt-6 flex flex-col gap-2">
                   <Button
                     onClick={handleSuccessModalClose}
-                    className="h-11 w-full rounded-full bg-gradient-to-r from-[#4F674D] to-[#304A34] text-sm font-semibold tracking-wide text-white shadow-[0_10px_22px_-10px_rgba(48,74,52,0.7)] transition-all hover:brightness-110 active:scale-[0.99]"
+                    className="h-11 w-full rounded-full bg-gradient-to-r from-[#4F6381] to-[#2F3B57] text-sm font-semibold tracking-wide text-white shadow-[0_10px_22px_-10px_rgba(47,59,87,0.7)] transition-all hover:brightness-110 active:scale-[0.99]"
                   >
                     Done
                   </Button>
@@ -1016,7 +1016,7 @@ export const ImprovedGuestList: React.FC<ImprovedGuestListProps> = ({
                       type="button"
                       variant="outline"
                       onClick={() => { setShowSuccessModal(false); resetForm(); }}
-                      className="h-11 w-full rounded-full border-[#DDE5D4] bg-white text-sm font-medium text-[#304A34] hover:bg-[#F7F9F4]"
+                      className="h-11 w-full rounded-full border-[#DDE5F0] bg-white text-sm font-medium text-[#2F3B57] hover:bg-[#F6F8FB]"
                     >
                       <UserPlus className="mr-2 h-4 w-4" />
                       Add Another Guest
@@ -1031,10 +1031,10 @@ export const ImprovedGuestList: React.FC<ImprovedGuestListProps> = ({
 
       {/* Global Loading Modal (for delete operations) */}
       {isSaving && !showModal && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center bg-[#1F2A1E]/45 p-4 backdrop-blur-[2px]" role="status" aria-live="polite">
-          <div className="dash-pop w-full max-w-xs rounded-3xl border border-[#DDE5D4] bg-[#FBFCF7] p-7 text-center shadow-2xl">
-            <div className="mx-auto mb-4 h-12 w-12 animate-spin rounded-full border-4 border-[#DDE5D4] border-t-[#4F674D]" />
-            <h3 className={`${playfair.className} text-lg font-semibold text-[#304A34]`}>
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-[#1E2638]/45 p-4 backdrop-blur-[2px]" role="status" aria-live="polite">
+          <div className="dash-pop w-full max-w-xs rounded-3xl border border-[#DDE5F0] bg-[#FBFAF7] p-7 text-center shadow-2xl">
+            <div className="mx-auto mb-4 h-12 w-12 animate-spin rounded-full border-4 border-[#DDE5F0] border-t-[#4F6381]" />
+            <h3 className={`${playfair.className} text-lg font-semibold text-[#2F3B57]`}>
               {operationType === 'delete' ? 'Removing guest…' : 'Saving…'}
             </h3>
             <p className="mt-1 text-xs text-gray-500">This only takes a moment.</p>

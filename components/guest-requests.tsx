@@ -82,14 +82,14 @@ const seatsOf = (request: GuestRequest) => Math.max(MIN_SEATS, parseInt(request.
 const emailOf = (request: GuestRequest) => (request.Email && request.Email !== "Pending" ? request.Email : "")
 
 const FIELD =
-  "w-full rounded-xl border border-[#DDE5D4] bg-[#FCFDFB] px-3 py-2.5 outline-none transition-colors focus:border-[#9EAF91] focus:bg-white focus:ring-2 focus:ring-[#9EAF91]/40"
+  "w-full rounded-xl border border-[#DDE5F0] bg-[#FBFAF7] px-3 py-2.5 outline-none transition-colors focus:border-[#97A5BD] focus:bg-white focus:ring-2 focus:ring-[#97A5BD]/40"
 
 function FieldLabel({ htmlFor, children, required = false }: { htmlFor?: string; children: ReactNode; required?: boolean }) {
   return (
-    <label htmlFor={htmlFor} className="flex items-center justify-between gap-2 text-[13px] font-medium text-[#304A34]">
+    <label htmlFor={htmlFor} className="flex items-center justify-between gap-2 text-[13px] font-medium text-[#2F3B57]">
       <span>{children}</span>
       {required ? (
-        <span className="rounded-full bg-[#EEF2EA] px-2 py-0.5 text-[10px] font-semibold uppercase tracking-wide text-[#4F674D]">Required</span>
+        <span className="rounded-full bg-[#EBF0F7] px-2 py-0.5 text-[10px] font-semibold uppercase tracking-wide text-[#4F6381]">Required</span>
       ) : (
         <span className="text-[10px] font-medium uppercase tracking-wide text-gray-400">Optional</span>
       )}
@@ -121,15 +121,15 @@ function DialogShell({
 }) {
   return (
     <div
-      className="fixed inset-0 z-50 flex items-end justify-center bg-[#1F2A1E]/45 p-0 backdrop-blur-[2px] sm:items-center sm:p-4"
+      className="fixed inset-0 z-50 flex items-end justify-center bg-[#1E2638]/45 p-0 backdrop-blur-[2px] sm:items-center sm:p-4"
       role="alertdialog"
       aria-modal="true"
       aria-labelledby={labelledBy}
       onClick={onClose}
     >
       <div
-        className={`dash-sheet w-full max-w-sm overflow-hidden rounded-t-3xl border bg-[#FBFCF7] shadow-[0_30px_60px_-25px_rgba(31,42,30,0.55)] sm:rounded-3xl ${
-          tone === "rose" ? "border-[#E8DCDC]" : "border-[#DDE5D4]"
+        className={`dash-sheet w-full max-w-sm overflow-hidden rounded-t-3xl border bg-[#FBFAF7] shadow-[0_30px_60px_-25px_rgba(30,38,56,0.55)] sm:rounded-3xl ${
+          tone === "rose" ? "border-[#E8DCDC]" : "border-[#DDE5F0]"
         }`}
         onClick={(e) => e.stopPropagation()}
       >
@@ -145,8 +145,8 @@ function DialogShell({
 function RequestSummary({ request }: { request: GuestRequest }) {
   const seats = seatsOf(request)
   return (
-    <div className="mx-auto mt-4 max-w-[17rem] rounded-2xl border border-[#DDE5D4] bg-white px-4 py-3">
-      <p className={`${playfair.className} text-base font-semibold text-[#304A34] [overflow-wrap:anywhere]`}>{request.Name}</p>
+    <div className="mx-auto mt-4 max-w-[17rem] rounded-2xl border border-[#DDE5F0] bg-white px-4 py-3">
+      <p className={`${playfair.className} text-base font-semibold text-[#2F3B57] [overflow-wrap:anywhere]`}>{request.Name}</p>
       <p className="mt-0.5 text-xs text-gray-500">
         {seats} {seats === 1 ? "seat" : "seats"} · {RSVP_STYLES[rsvpKey(request.RSVP)].label}
       </p>
@@ -292,7 +292,7 @@ export function GuestRequests({ requests, onRefresh, onApproveRequest, isLoading
           type="button"
           onClick={onRefresh}
           disabled={isLoading}
-          className="inline-flex items-center gap-1.5 rounded-full border border-[#DDE5D4] bg-white px-3 py-1.5 text-xs font-medium text-[#4F674D] transition-colors hover:bg-[#F7F9F4] disabled:opacity-50"
+          className="inline-flex items-center gap-1.5 rounded-full border border-[#DDE5F0] bg-white px-3 py-1.5 text-xs font-medium text-[#4F6381] transition-colors hover:bg-[#F6F8FB] disabled:opacity-50"
         >
           <RefreshCw className={`h-3.5 w-3.5 ${isLoading ? "animate-spin" : ""}`} />
           Refresh
@@ -312,7 +312,7 @@ export function GuestRequests({ requests, onRefresh, onApproveRequest, isLoading
       {/* Stats */}
       <div className="grid grid-cols-2 gap-2.5 sm:gap-4 lg:grid-cols-4">
         {[
-          { label: "Requests", value: stats.total, tone: "border-[#DDE5D4] bg-white text-[#4F674D]" },
+          { label: "Requests", value: stats.total, tone: "border-[#DDE5F0] bg-white text-[#4F6381]" },
           { label: "Will attend", value: stats.attending, tone: "border-green-200 bg-green-50 text-green-700" },
           { label: "Maybe / no answer", value: stats.undecided, tone: "border-amber-200 bg-amber-50 text-amber-700" },
           { label: "Seats requested", value: stats.seats, tone: "border-blue-200 bg-blue-50 text-blue-700" },
@@ -325,12 +325,12 @@ export function GuestRequests({ requests, onRefresh, onApproveRequest, isLoading
       </div>
 
       {/* Explainer */}
-      <div className="flex gap-3 rounded-xl border border-[#DDE5D4] bg-[#F7F9F4] p-3 sm:p-4">
-        <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-white text-[#4F674D] shadow-sm ring-1 ring-[#DDE5D4]">
+      <div className="flex gap-3 rounded-xl border border-[#DDE5F0] bg-[#F6F8FB] p-3 sm:p-4">
+        <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-white text-[#4F6381] shadow-sm ring-1 ring-[#DDE5F0]">
           <UserPlus className="h-4 w-4" />
         </span>
-        <p className="text-xs leading-relaxed text-[#4B5B49] sm:text-sm">
-          People who didn&apos;t find their name and asked to join. <span className="font-semibold text-[#304A34]">Approve</span> adds
+        <p className="text-xs leading-relaxed text-[#4F6381] sm:text-sm">
+          People who didn&apos;t find their name and asked to join. <span className="font-semibold text-[#2F3B57]">Approve</span> adds
           them to your guest list so they can RSVP; edit or delete as needed.
         </p>
       </div>
@@ -343,16 +343,16 @@ export function GuestRequests({ requests, onRefresh, onApproveRequest, isLoading
           value={searchQuery}
           onChange={(e) => setSearchQuery(e.target.value)}
           placeholder="Search by name, email or phone..."
-          className="w-full rounded-lg border border-[#DDE5D4] bg-white py-2.5 pl-10 pr-4 outline-none focus:ring-2 focus:ring-[#9EAF91]"
+          className="w-full rounded-lg border border-[#DDE5F0] bg-white py-2.5 pl-10 pr-4 outline-none focus:ring-2 focus:ring-[#97A5BD]"
         />
       </div>
 
       {filteredRequests.length === 0 ? (
-        <div className="rounded-xl border border-[#DDE5D4] bg-white px-6 py-12 text-center">
-          <span className="mx-auto mb-3 flex h-14 w-14 items-center justify-center rounded-full bg-[#F7F9F4]">
-            <UserPlus className="h-7 w-7 text-[#AAB9A0]" />
+        <div className="rounded-xl border border-[#DDE5F0] bg-white px-6 py-12 text-center">
+          <span className="mx-auto mb-3 flex h-14 w-14 items-center justify-center rounded-full bg-[#F6F8FB]">
+            <UserPlus className="h-7 w-7 text-[#AFBED7]" />
           </span>
-          <h3 className={`${playfair.className} text-lg font-semibold text-[#304A34]`}>
+          <h3 className={`${playfair.className} text-lg font-semibold text-[#2F3B57]`}>
             {searchQuery ? "No matching requests" : "No join requests"}
           </h3>
           <p className="mt-1 text-sm text-gray-500">
@@ -371,18 +371,18 @@ export function GuestRequests({ requests, onRefresh, onApproveRequest, isLoading
               const email = emailOf(request)
               const count = seatsOf(request)
               return (
-                <div key={`${request.Name}-${index}`} className="rounded-xl border border-[#DDE5D4] bg-white p-4 shadow-sm">
+                <div key={`${request.Name}-${index}`} className="rounded-xl border border-[#DDE5F0] bg-white p-4 shadow-sm">
                   <div className="flex items-start justify-between gap-3">
                     <p className="min-w-0 flex-1 font-semibold text-gray-900 [overflow-wrap:anywhere]">{request.Name}</p>
                     <RsvpBadge value={request.RSVP} />
                   </div>
 
                   <div className="mt-3 grid grid-cols-2 gap-2 text-xs">
-                    <div className="rounded-lg bg-[#F7F9F4] px-3 py-2">
+                    <div className="rounded-lg bg-[#F6F8FB] px-3 py-2">
                       <p className="text-[10px] uppercase tracking-wide text-gray-500">Seats</p>
-                      <p className="mt-0.5 font-semibold text-[#4F674D]">{count}</p>
+                      <p className="mt-0.5 font-semibold text-[#4F6381]">{count}</p>
                     </div>
-                    <div className="min-w-0 rounded-lg bg-[#F7F9F4] px-3 py-2">
+                    <div className="min-w-0 rounded-lg bg-[#F6F8FB] px-3 py-2">
                       <p className="text-[10px] uppercase tracking-wide text-gray-500">Phone</p>
                       <p className="mt-0.5 truncate font-semibold text-gray-700">{request.Phone || "—"}</p>
                     </div>
@@ -390,22 +390,22 @@ export function GuestRequests({ requests, onRefresh, onApproveRequest, isLoading
 
                   {email && <p className="mt-2.5 text-xs text-gray-600 [overflow-wrap:anywhere]">{email}</p>}
                   {request.Message && (
-                    <p className="mt-2.5 rounded-lg border border-[#EEF2EA] bg-[#FCFDFB] px-3 py-2 text-xs italic leading-relaxed text-gray-600 [overflow-wrap:anywhere]">
+                    <p className="mt-2.5 rounded-lg border border-[#EBF0F7] bg-[#FBFAF7] px-3 py-2 text-xs italic leading-relaxed text-gray-600 [overflow-wrap:anywhere]">
                       &ldquo;{request.Message}&rdquo;
                     </p>
                   )}
 
-                  <div className="mt-3 flex gap-2 border-t border-[#EEF2EA] pt-3">
+                  <div className="mt-3 flex gap-2 border-t border-[#EBF0F7] pt-3">
                     <button
                       onClick={() => setConfirm({ kind: "approve", request })}
-                      className={`${actionBtn} border-transparent bg-gradient-to-r from-[#4F674D] to-[#304A34] font-semibold text-white active:brightness-110`}
+                      className={`${actionBtn} border-transparent bg-gradient-to-r from-[#4F6381] to-[#2F3B57] font-semibold text-white active:brightness-110`}
                     >
                       <Check className="h-4 w-4" /> Approve
                     </button>
                     <button
                       onClick={() => handleEditClick(request)}
                       aria-label={`Edit ${request.Name}`}
-                      className={`${actionBtn} max-w-[3rem] border-[#DDE5D4] text-[#304A34] active:bg-[#F7F9F4]`}
+                      className={`${actionBtn} max-w-[3rem] border-[#DDE5F0] text-[#2F3B57] active:bg-[#F6F8FB]`}
                     >
                       <Edit2 className="h-4 w-4" />
                     </button>
@@ -423,10 +423,10 @@ export function GuestRequests({ requests, onRefresh, onApproveRequest, isLoading
           </div>
 
           {/* Table (tablet & desktop) */}
-          <div className="hidden overflow-hidden rounded-xl border border-[#DDE5D4] bg-white shadow-sm md:block">
+          <div className="hidden overflow-hidden rounded-xl border border-[#DDE5F0] bg-white shadow-sm md:block">
             <div className="overflow-x-auto">
               <table className="w-full text-left">
-                <thead className="bg-[#DDE5D4] text-[#304A34]">
+                <thead className="bg-[#DDE5F0] text-[#2F3B57]">
                   <tr>
                     <th className="px-4 py-3 text-xs font-semibold uppercase lg:px-6">Name</th>
                     <th className="px-4 py-3 text-xs font-semibold uppercase lg:px-6">Contact</th>
@@ -436,7 +436,7 @@ export function GuestRequests({ requests, onRefresh, onApproveRequest, isLoading
                     <th className="px-4 py-3 text-right text-xs font-semibold uppercase lg:px-6">Actions</th>
                   </tr>
                 </thead>
-                <tbody className="divide-y divide-[#DDE5D4]">
+                <tbody className="divide-y divide-[#DDE5F0]">
                   {filteredRequests.map((request, index) => {
                     const email = emailOf(request)
                     return (
@@ -460,7 +460,7 @@ export function GuestRequests({ requests, onRefresh, onApproveRequest, isLoading
                           {!request.Phone && !email && <span className="text-gray-400">—</span>}
                         </td>
                         <td className="px-4 py-4 text-center lg:px-6">
-                          <span className="text-sm font-semibold text-[#4F674D]">{seatsOf(request)}</span>
+                          <span className="text-sm font-semibold text-[#4F6381]">{seatsOf(request)}</span>
                         </td>
                         <td className="px-4 py-4 lg:px-6">
                           {request.Message ? (
@@ -478,7 +478,7 @@ export function GuestRequests({ requests, onRefresh, onApproveRequest, isLoading
                           <div className="flex items-center justify-end gap-2">
                             <button
                               onClick={() => setConfirm({ kind: "approve", request })}
-                              className="inline-flex items-center gap-1.5 rounded-full bg-gradient-to-r from-[#4F674D] to-[#304A34] px-3.5 py-1.5 text-xs font-semibold text-white shadow-sm transition-all hover:brightness-110"
+                              className="inline-flex items-center gap-1.5 rounded-full bg-gradient-to-r from-[#4F6381] to-[#2F3B57] px-3.5 py-1.5 text-xs font-semibold text-white shadow-sm transition-all hover:brightness-110"
                             >
                               <Check className="h-3.5 w-3.5" />
                               Approve
@@ -516,19 +516,19 @@ export function GuestRequests({ requests, onRefresh, onApproveRequest, isLoading
             onSubmit={handleUpdateRequest}
             className="dash-sheet relative max-h-[94dvh] w-full max-w-lg overflow-y-auto rounded-t-2xl bg-white shadow-2xl sm:max-h-[90vh] sm:rounded-2xl"
           >
-            <div className="sticky top-0 z-20 border-b border-[#DDE5D4] bg-[#FBFCF7]/95 px-4 pt-3 pb-4 backdrop-blur-sm sm:px-6 sm:py-5">
+            <div className="sticky top-0 z-20 border-b border-[#DDE5F0] bg-[#FBFAF7]/95 px-4 pt-3 pb-4 backdrop-blur-sm sm:px-6 sm:py-5">
               <div className="mx-auto mb-3 h-1.5 w-10 rounded-full bg-gray-300/70 sm:hidden" aria-hidden />
               <button
                 type="button"
                 onClick={closeEdit}
                 aria-label="Close"
-                className="absolute right-3 top-3 flex h-9 w-9 items-center justify-center rounded-full border border-[#DDE5D4] bg-white text-gray-500 shadow-sm transition-colors hover:text-[#304A34] sm:right-5 sm:top-5"
+                className="absolute right-3 top-3 flex h-9 w-9 items-center justify-center rounded-full border border-[#DDE5F0] bg-white text-gray-500 shadow-sm transition-colors hover:text-[#2F3B57] sm:right-5 sm:top-5"
               >
                 <X className="h-4 w-4" />
               </button>
               <div className="px-10 text-center sm:px-0 sm:pr-12 sm:text-left">
-                <p className={`${cinzel.className} text-[10px] font-semibold uppercase tracking-[0.28em] text-[#718566]`}>Join Request</p>
-                <h2 className={`${playfair.className} mt-1 text-[1.45rem] font-semibold leading-tight text-[#304A34] sm:text-2xl`}>
+                <p className={`${cinzel.className} text-[10px] font-semibold uppercase tracking-[0.28em] text-[#607CA6]`}>Join Request</p>
+                <h2 className={`${playfair.className} mt-1 text-[1.45rem] font-semibold leading-tight text-[#2F3B57] sm:text-2xl`}>
                   Edit Request
                 </h2>
                 <p className="mx-auto mt-1.5 max-w-xs text-[11px] leading-relaxed text-gray-500 sm:mx-0 sm:max-w-none sm:text-xs">
@@ -557,7 +557,7 @@ export function GuestRequests({ requests, onRefresh, onApproveRequest, isLoading
                         aria-checked={active}
                         onClick={() => setFormData((f) => ({ ...f, RSVP: value }))}
                         className={`rounded-xl border px-2 py-2.5 text-xs font-semibold transition-colors sm:text-sm ${
-                          active ? style.active : "border-[#DDE5D4] bg-white text-gray-500 hover:text-[#304A34]"
+                          active ? style.active : "border-[#DDE5F0] bg-white text-gray-500 hover:text-[#2F3B57]"
                         }`}
                       >
                         {style.label}
@@ -569,13 +569,13 @@ export function GuestRequests({ requests, onRefresh, onApproveRequest, isLoading
 
               <div className="space-y-1">
                 <FieldLabel htmlFor="req-seats" required>Seats</FieldLabel>
-                <div className="flex items-stretch overflow-hidden rounded-xl border border-[#DDE5D4] bg-[#FCFDFB] focus-within:border-[#9EAF91] focus-within:ring-2 focus-within:ring-[#9EAF91]/40">
+                <div className="flex items-stretch overflow-hidden rounded-xl border border-[#DDE5F0] bg-[#FBFAF7] focus-within:border-[#97A5BD] focus-within:ring-2 focus-within:ring-[#97A5BD]/40">
                   <button
                     type="button"
                     onClick={() => setSeats(seats - 1)}
                     disabled={seats <= MIN_SEATS}
                     aria-label="Fewer seats"
-                    className="flex w-12 shrink-0 items-center justify-center border-r border-[#DDE5D4] text-[#4F674D] transition-colors hover:bg-[#EEF2EA] disabled:cursor-not-allowed disabled:text-gray-300 disabled:hover:bg-transparent"
+                    className="flex w-12 shrink-0 items-center justify-center border-r border-[#DDE5F0] text-[#4F6381] transition-colors hover:bg-[#EBF0F7] disabled:cursor-not-allowed disabled:text-gray-300 disabled:hover:bg-transparent"
                   >
                     <Minus className="h-4 w-4" />
                   </button>
@@ -588,7 +588,7 @@ export function GuestRequests({ requests, onRefresh, onApproveRequest, isLoading
                       max={MAX_SEATS}
                       value={seats}
                       onChange={(e) => setSeats(parseInt(e.target.value) || MIN_SEATS)}
-                      className="dash-stepper-input w-16 bg-transparent text-center text-xl font-bold leading-none text-[#304A34] outline-none [appearance:textfield] [&::-webkit-inner-spin-button]:appearance-none [&::-webkit-outer-spin-button]:appearance-none"
+                      className="dash-stepper-input w-16 bg-transparent text-center text-xl font-bold leading-none text-[#2F3B57] outline-none [appearance:textfield] [&::-webkit-inner-spin-button]:appearance-none [&::-webkit-outer-spin-button]:appearance-none"
                     />
                     <span className="mt-0.5 text-[10px] font-medium uppercase tracking-wide text-gray-400">
                       {seats === 1 ? "guest" : "guests"}
@@ -599,7 +599,7 @@ export function GuestRequests({ requests, onRefresh, onApproveRequest, isLoading
                     onClick={() => setSeats(seats + 1)}
                     disabled={seats >= MAX_SEATS}
                     aria-label="More seats"
-                    className="flex w-12 shrink-0 items-center justify-center border-l border-[#DDE5D4] text-[#4F674D] transition-colors hover:bg-[#EEF2EA] disabled:cursor-not-allowed disabled:text-gray-300 disabled:hover:bg-transparent"
+                    className="flex w-12 shrink-0 items-center justify-center border-l border-[#DDE5F0] text-[#4F6381] transition-colors hover:bg-[#EBF0F7] disabled:cursor-not-allowed disabled:text-gray-300 disabled:hover:bg-transparent"
                   >
                     <Plus className="h-4 w-4" />
                   </button>
@@ -643,20 +643,20 @@ export function GuestRequests({ requests, onRefresh, onApproveRequest, isLoading
                 />
               </div>
 
-              <div className="sticky bottom-0 z-10 -mx-4 flex flex-col-reverse gap-2 border-t border-[#DDE5D4] bg-white px-4 pt-4 pb-[max(1rem,env(safe-area-inset-bottom))] sm:static sm:mx-0 sm:flex-row sm:justify-end sm:gap-3 sm:px-0 sm:pt-5 sm:pb-0">
+              <div className="sticky bottom-0 z-10 -mx-4 flex flex-col-reverse gap-2 border-t border-[#DDE5F0] bg-white px-4 pt-4 pb-[max(1rem,env(safe-area-inset-bottom))] sm:static sm:mx-0 sm:flex-row sm:justify-end sm:gap-3 sm:px-0 sm:pt-5 sm:pb-0">
                 <Button
                   type="button"
                   variant="outline"
                   onClick={closeEdit}
                   disabled={busy === "update"}
-                  className="h-11 w-full rounded-full border-[#DDE5D4] px-7 text-sm font-medium text-gray-600 hover:bg-[#F7F9F4] hover:text-[#304A34] sm:w-auto"
+                  className="h-11 w-full rounded-full border-[#DDE5F0] px-7 text-sm font-medium text-gray-600 hover:bg-[#F6F8FB] hover:text-[#2F3B57] sm:w-auto"
                 >
                   Cancel
                 </Button>
                 <Button
                   type="submit"
                   disabled={busy === "update"}
-                  className="h-11 w-full rounded-full bg-gradient-to-r from-[#4F674D] to-[#304A34] px-8 text-sm font-semibold tracking-wide text-white shadow-[0_10px_22px_-10px_rgba(48,74,52,0.7)] transition-all hover:brightness-110 active:scale-[0.99] disabled:opacity-50 sm:w-auto"
+                  className="h-11 w-full rounded-full bg-gradient-to-r from-[#4F6381] to-[#2F3B57] px-8 text-sm font-semibold tracking-wide text-white shadow-[0_10px_22px_-10px_rgba(47,59,87,0.7)] transition-all hover:brightness-110 active:scale-[0.99] disabled:opacity-50 sm:w-auto"
                 >
                   {busy === "update" ? (
                     <span className="flex items-center gap-2">
@@ -681,11 +681,11 @@ export function GuestRequests({ requests, onRefresh, onApproveRequest, isLoading
         <DialogShell labelledBy="req-confirm-title" onClose={() => setConfirm(null)} tone={confirm.kind === "delete" ? "rose" : "sage"}>
           {confirm.kind === "approve" ? (
             <>
-              <span className="dash-pop-badge mx-auto flex h-14 w-14 items-center justify-center rounded-full bg-[#EEF2EA] ring-8 ring-[#F5F8F2]">
-                <UserPlus className="h-6 w-6 text-[#4F674D]" />
+              <span className="dash-pop-badge mx-auto flex h-14 w-14 items-center justify-center rounded-full bg-[#EBF0F7] ring-8 ring-[#F5F7FA]">
+                <UserPlus className="h-6 w-6 text-[#4F6381]" />
               </span>
-              <p className={`${cinzel.className} mt-4 text-[10px] font-semibold uppercase tracking-[0.3em] text-[#718566]`}>Approve request</p>
-              <h3 id="req-confirm-title" className={`${playfair.className} mt-1 text-[1.4rem] font-semibold leading-tight text-[#304A34]`}>
+              <p className={`${cinzel.className} mt-4 text-[10px] font-semibold uppercase tracking-[0.3em] text-[#607CA6]`}>Approve request</p>
+              <h3 id="req-confirm-title" className={`${playfair.className} mt-1 text-[1.4rem] font-semibold leading-tight text-[#2F3B57]`}>
                 Add to your guest list?
               </h3>
               <RequestSummary request={confirm.request} />
@@ -699,7 +699,7 @@ export function GuestRequests({ requests, onRefresh, onApproveRequest, isLoading
                 <AlertTriangle className="h-6 w-6 text-[#A04A4A]" />
               </span>
               <p className={`${cinzel.className} mt-4 text-[10px] font-semibold uppercase tracking-[0.3em] text-[#A04A4A]/80`}>Delete request</p>
-              <h3 id="req-confirm-title" className={`${playfair.className} mt-1 text-[1.4rem] font-semibold leading-tight text-[#304A34]`}>
+              <h3 id="req-confirm-title" className={`${playfair.className} mt-1 text-[1.4rem] font-semibold leading-tight text-[#2F3B57]`}>
                 Delete this request?
               </h3>
               <RequestSummary request={confirm.request} />
@@ -715,7 +715,7 @@ export function GuestRequests({ requests, onRefresh, onApproveRequest, isLoading
               variant="outline"
               autoFocus
               onClick={() => setConfirm(null)}
-              className="h-11 w-full rounded-full border-[#DDE5D4] bg-white text-sm font-medium text-[#304A34] hover:bg-[#F7F9F4] sm:flex-1"
+              className="h-11 w-full rounded-full border-[#DDE5F0] bg-white text-sm font-medium text-[#2F3B57] hover:bg-[#F6F8FB] sm:flex-1"
             >
               {confirm.kind === "approve" ? "Not Yet" : "Keep Request"}
             </Button>
@@ -724,7 +724,7 @@ export function GuestRequests({ requests, onRefresh, onApproveRequest, isLoading
               onClick={() => void runConfirm()}
               className={`h-11 w-full rounded-full text-sm font-semibold text-white transition-all hover:brightness-110 active:scale-[0.99] sm:flex-1 ${
                 confirm.kind === "approve"
-                  ? "bg-gradient-to-r from-[#4F674D] to-[#304A34] shadow-[0_10px_22px_-10px_rgba(48,74,52,0.7)]"
+                  ? "bg-gradient-to-r from-[#4F6381] to-[#2F3B57] shadow-[0_10px_22px_-10px_rgba(47,59,87,0.7)]"
                   : "bg-gradient-to-r from-[#B05555] to-[#8E3B3B] shadow-[0_10px_22px_-10px_rgba(142,59,59,0.7)]"
               }`}
             >
@@ -746,10 +746,10 @@ export function GuestRequests({ requests, onRefresh, onApproveRequest, isLoading
 
       {/* ── Working ─────────────────────────────────────────────────────── */}
       {(busy === "approve" || busy === "delete") && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center bg-[#1F2A1E]/45 p-4 backdrop-blur-[2px]" role="status" aria-live="polite">
-          <div className="dash-pop w-full max-w-xs rounded-3xl border border-[#DDE5D4] bg-[#FBFCF7] p-7 text-center shadow-2xl">
-            <div className="mx-auto mb-4 h-12 w-12 animate-spin rounded-full border-4 border-[#DDE5D4] border-t-[#4F674D]" />
-            <h3 className={`${playfair.className} text-lg font-semibold text-[#304A34]`}>
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-[#1E2638]/45 p-4 backdrop-blur-[2px]" role="status" aria-live="polite">
+          <div className="dash-pop w-full max-w-xs rounded-3xl border border-[#DDE5F0] bg-[#FBFAF7] p-7 text-center shadow-2xl">
+            <div className="mx-auto mb-4 h-12 w-12 animate-spin rounded-full border-4 border-[#DDE5F0] border-t-[#4F6381]" />
+            <h3 className={`${playfair.className} text-lg font-semibold text-[#2F3B57]`}>
               {busy === "approve" ? "Adding to guest list…" : "Deleting request…"}
             </h3>
             <p className="mt-1 text-xs text-gray-500">This only takes a moment.</p>
@@ -760,13 +760,13 @@ export function GuestRequests({ requests, onRefresh, onApproveRequest, isLoading
       {/* ── Success ─────────────────────────────────────────────────────── */}
       {done && (
         <div
-          className="fixed inset-0 z-50 flex items-center justify-center bg-[#1F2A1E]/45 p-4 backdrop-blur-[2px]"
+          className="fixed inset-0 z-50 flex items-center justify-center bg-[#1E2638]/45 p-4 backdrop-blur-[2px]"
           role="dialog"
           aria-modal="true"
           aria-labelledby="req-done-title"
         >
-          <div className="dash-pop relative w-full max-w-sm overflow-hidden rounded-3xl border border-[#DDE5D4] bg-[#FBFCF7] shadow-[0_30px_60px_-25px_rgba(31,42,30,0.55)]">
-            <div className="relative overflow-hidden bg-gradient-to-br from-[#718566] via-[#4F674D] to-[#304A34] px-6 pt-7 pb-12 text-center">
+          <div className="dash-pop relative w-full max-w-sm overflow-hidden rounded-3xl border border-[#DDE5F0] bg-[#FBFAF7] shadow-[0_30px_60px_-25px_rgba(30,38,56,0.55)]">
+            <div className="relative overflow-hidden bg-gradient-to-br from-[#607CA6] via-[#4F6381] to-[#2F3B57] px-6 pt-7 pb-12 text-center">
               <span className="pointer-events-none absolute -left-10 -top-10 h-32 w-32 rounded-full bg-white/10" aria-hidden />
               <span className="pointer-events-none absolute -right-8 top-6 h-20 w-20 rounded-full bg-white/10" aria-hidden />
               <p className={`${cinzel.className} relative text-[10px] font-semibold uppercase tracking-[0.3em] text-white/75`}>
@@ -777,10 +777,10 @@ export function GuestRequests({ requests, onRefresh, onApproveRequest, isLoading
               </h3>
             </div>
             <div className="relative -mt-9 flex justify-center">
-              <span className="dash-pop-badge flex h-[4.5rem] w-[4.5rem] items-center justify-center rounded-full border-4 border-[#FBFCF7] bg-white shadow-lg">
+              <span className="dash-pop-badge flex h-[4.5rem] w-[4.5rem] items-center justify-center rounded-full border-4 border-[#FBFAF7] bg-white shadow-lg">
                 <span
                   className={`flex h-12 w-12 items-center justify-center rounded-full ${
-                    done.kind === "deleted" ? "bg-[#F3EAEA] text-[#9B4C4C]" : "bg-[#EEF2EA] text-[#4F674D]"
+                    done.kind === "deleted" ? "bg-[#F3EAEA] text-[#9B4C4C]" : "bg-[#EBF0F7] text-[#4F6381]"
                   }`}
                 >
                   {done.kind === "deleted" ? (
@@ -794,11 +794,11 @@ export function GuestRequests({ requests, onRefresh, onApproveRequest, isLoading
               </span>
             </div>
             <div className="px-6 pt-4 pb-6 text-center">
-              <p className={`${playfair.className} text-lg font-semibold text-[#304A34] [overflow-wrap:anywhere]`}>{done.name}</p>
+              <p className={`${playfair.className} text-lg font-semibold text-[#2F3B57] [overflow-wrap:anywhere]`}>{done.name}</p>
               <div className="mx-auto mt-2 flex w-24 items-center gap-1.5" aria-hidden>
-                <span className="h-px flex-1 bg-gradient-to-r from-transparent to-[#AAB9A0]" />
-                <span className="h-1 w-1 rotate-45 bg-[#718566]" />
-                <span className="h-px flex-1 bg-gradient-to-l from-transparent to-[#AAB9A0]" />
+                <span className="h-px flex-1 bg-gradient-to-r from-transparent to-[#AFBED7]" />
+                <span className="h-1 w-1 rotate-45 bg-[#607CA6]" />
+                <span className="h-px flex-1 bg-gradient-to-l from-transparent to-[#AFBED7]" />
               </div>
               <p className="mx-auto mt-3 max-w-[17rem] text-sm leading-relaxed text-gray-600">
                 {done.kind === "approved"
@@ -809,7 +809,7 @@ export function GuestRequests({ requests, onRefresh, onApproveRequest, isLoading
               </p>
               <Button
                 onClick={() => setDone(null)}
-                className="mt-6 h-11 w-full rounded-full bg-gradient-to-r from-[#4F674D] to-[#304A34] text-sm font-semibold tracking-wide text-white shadow-[0_10px_22px_-10px_rgba(48,74,52,0.7)] transition-all hover:brightness-110 active:scale-[0.99]"
+                className="mt-6 h-11 w-full rounded-full bg-gradient-to-r from-[#4F6381] to-[#2F3B57] text-sm font-semibold tracking-wide text-white shadow-[0_10px_22px_-10px_rgba(47,59,87,0.7)] transition-all hover:brightness-110 active:scale-[0.99]"
               >
                 Done
               </Button>

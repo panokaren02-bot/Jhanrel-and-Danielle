@@ -349,7 +349,7 @@ export function Hero() {
         </motion.p>
 
         <motion.p
-          className={`${theSeasons.className} home-hero-date mt-4 text-[clamp(1.85rem,8.5vw,3.65rem)] font-normal leading-none tracking-[0.08em] sm:mt-5`}
+          className={`${cinzel.className} home-hero-date mt-4 text-[clamp(1.85rem,8.5vw,3.65rem)] font-semibold leading-none tracking-[0.06em] tabular-nums sm:mt-5`}
           {...fadeUp(0.28)}
         >
           {numericDate}

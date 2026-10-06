@@ -66,15 +66,15 @@ export type AttireColor = string | { name: string; hex: string }
 
 // ── The couple ──────────────────────────────────────────────────────────────
 const COUPLE = {
-  bride: "Jemiree M. Atienza",
-  brideNickname: "Jemiree",
-  groom: "JV Jade Geronga",
-  groomNickname: "JV",
+  bride: "Danielle Lacasandile",
+  brideNickname: "Danielle",
+  groom: "Jhanrel Ballocanag",
+  groomNickname: "Jhanrel",
 }
 
 // ── Date & times ────────────────────────────────────────────────────────────
-const WEDDING_DATE = "December 20, 2026" // e.g. "June 5, 2027"
-const WEDDING_DAY = "Sunday"
+const WEDDING_DATE = "November 14, 2026" // e.g. "June 5, 2027"
+const WEDDING_DAY = "Saturday"
 const TIMES = {
   entourageCall: "3:00 PM", // entourage arrival
   guestArrival: "3:30 PM", // guests arrival (shown in Event Details + reminders)
@@ -85,20 +85,16 @@ const TIMES = {
 // ── Venues ──────────────────────────────────────────────────────────────────
 
 const CEREMONY_VENUE = {
-  name: "Erica's Garden, Hagonoy Bulacan",
-  address: "Hagonoy, Bulacan, Philippines",
-  map: "https://maps.app.goo.gl/xpnYtFZ4Wr6p3XTr5",
-  photos: ["/Details/ceremony (1).jpg", "/Details/ceremony (2).jpg", "/Details/ceremony (3).jpg"],
+  name: "El Marie Events Place Bacnotan, La Union",
+  address: "Bacnotan, 2515 La Union, Philippines",
+  map: "https://maps.app.goo.gl/x9QGXZEhc3J9CKYS6",
+  photos: ["/Details/reception_1.jpg", "/Details/reception_2.jpg", "/Details/reception_3.jpg"],
 }
 const RECEPTION_VENUE = {
-  name: "Erica's Garden, Hagonoy Bulacan",
-  address: "Hagonoy, Bulacan, Philippines",
-  map: "https://maps.app.goo.gl/25rg2xVft55rQXvs7",
-  photos: [
-    "/Details/ceremony (1).jpg",
-    "/Details/ceremony (2).jpg",
-    "/Details/ceremony (3).jpg",
-  ],
+  name: "El Marie Events Place Bacnotan, La Union",
+  address: "Bacnotan, 2515 La Union, Philippines",
+  map: "https://maps.app.goo.gl/x9QGXZEhc3J9CKYS6",
+  photos: ["/Details/reception_1.jpg", "/Details/reception_2.jpg", "/Details/reception_3.jpg"],
 }
 
 // ── Venue cards (Event Details section) ─────────────────────────────────────
@@ -141,11 +137,11 @@ const VENUE_CARDS = {
 
 // ── RSVP & contact ──────────────────────────────────────────────────────────
 const RSVP = {
-  deadline: "December 1, 2026",
+  deadline: "November 1, 2026",
   coordinator: "{groom} / {bride}", // {groom} / {bride} → couple nicknames
   phone: "to be announced",
 }
-const HASHTAGS = ["#TheJemireeJadeStory"] // ⚠ check — looks like it's from a previous couple
+const HASHTAGS = ["#TheDanielleJhanrelStory"] // ⚠ check — looks like it's from a previous couple
 
 // ── Attire guide (Event Details → Attire Guidelines) ────────────────────────
 // SHOW = which cards to display AND their order, top to bottom. Examples:
@@ -164,17 +160,17 @@ const HASHTAGS = ["#TheJemireeJadeStory"] // ⚠ check — looks like it's from 
 //     details:   the dress code text ("" hides this half of the card)
 //     highlight: phrase inside details shown bold + underlined ("" for none)
 const DRESS_CODE_PALETTE: AttireColor[] = [
-  { name: "Soft Sage", hex: "#B7C5A5" },
-  { name: "Dusty Sage", hex: "#95A98A" },
-  { name: "Muted Olive", hex: "#748A69" },
-  { name: "Deep Sage", hex: "#586F50" },
-  { name: "Forest Green", hex: "#3E5940" },
-]
+  { name: "Pale Blue", hex: "#DDE5F0" },
+  { name: "Powder Blue", hex: "#AFBED7" },
+  { name: "Dusty Blue", hex: "#607CA6" },
+  { name: "Classic Blue", hex: "#4F6381" },
+  { name: "Deep Navy", hex: "#2F3B57" },
+];
 
 
 
 const ATTIRE = {
-  show: ["sponsors", "guests"] as AttireGroupId[],
+  show: ["guests"] as AttireGroupId[],
 
   sponsors: {
     title: "Principal Sponsors",
@@ -204,35 +200,37 @@ const ATTIRE = {
     ladies: {
       label: "Ladies",
       details:
-        "Elegant floor-length dresses in coordinated sage green and botanical green shades. Dress styles may vary while maintaining a refined and cohesive look.",
-      highlight: "Formal Dresses",
+        "Casual and polished outfits in coordinated shades of blue. Ladies may wear elegant maxi dresses, midi dresses, floral dresses, or semi-formal blouses paired with trousers while maintaining a cohesive and refined look.",
+      highlight:
+        "Casual Blue Attire • Strictly No White or Cream Dresses",
     },
-
+    
     gentlemen: {
       label: "Gentlemen",
       details:
-        "Dress shirts paired with tailored slacks in complementary sage, olive, beige, or deep green tones.",
-      highlight: "Dress Shirt with Slacks",
+        "Smart casual outfits in coordinated shades of blue. Polo shirts, casual dress shirts, and tailored trousers are encouraged for a comfortable yet polished look.",
+      highlight: "Smart Casual Blue Attire",
     },
   },
 
   guests: {
     title: "Guests",
-    image: "/Details/guest.png",
+    image: "/Details/attire-guest.png",
     palette: DRESS_CODE_PALETTE,
 
     ladies: {
       label: "Ladies",
       details:
-        "Elegant formal dresses in the wedding's sage green palette. Guests may choose different dress styles while keeping the overall look sophisticated, soft, and coordinated.",
-      highlight: "Formal Dresses",
+        "Casual and polished outfits in coordinated shades of blue. Ladies may wear elegant maxi dresses, midi dresses, floral dresses, or semi-formal blouses paired with trousers while maintaining a cohesive and refined look.",
+      highlight:
+        "Casual Blue Attire • Strictly No White or Cream Dresses",
     },
-
+    
     gentlemen: {
       label: "Gentlemen",
       details:
-        "Dress shirts paired with tailored slacks in complementary sage, olive, beige, or neutral tones for a polished and sophisticated formal ensemble.",
-      highlight: "Dress Shirt with Slacks",
+        "Smart casual outfits in coordinated shades of blue. Polo shirts, casual dress shirts, and tailored trousers are encouraged for a comfortable yet polished look.",
+      highlight: "Smart Casual Blue Attire",
     },
   },
 }
@@ -254,9 +252,9 @@ const DISPLAY_MODE = "plain" as "photos" | "plain"
 // ── Shared images ───────────────────────────────────────────────────────────
 const BRAND = {
   monogram: "/monogram/monogram.png",
-  coupleNameImage: "/Details/newCoupleName.png", // couple-name lettering (loader, envelope)
-  seal: "/deco/sealnew.png", // envelope wax seal
-  backgroundMusic: "/background_music/BTS - Magic Shop (Beautiful Wedding Piano Version).mp3",
+  coupleNameImage: "/Details/couple-name.png", // couple-name lettering (loader, envelope)
+  seal: "/Details/seal.png", // envelope wax seal
+  backgroundMusic: "/background_music/Wedding Background Garden #wedding #fantasy #weddingbackgrounds #gardenwedding #weddingvideo.mp3",
 }
 
 // Couple photos reused across the site (gallery, loader, reminders, snap & share, closing)
@@ -277,14 +275,14 @@ const COUPLE_PHOTOS = [
 // Change a path here to swap it on every section at once.
 // To change ONE section only, override it there, e.g. decos: { ...SECTION_DECOS, footerVine: "" }
 const DECOR = {
-  cornerTopLeft: "/deco/top-left-deco.png",
-  cornerTopRight: "/deco/top-right-deco.png",
-  cornerBottomLeft: "/deco/bottom-left-deco.png",
-  cornerBottomRight: "/deco/bottom-right-deco.png",
-  headerOrnament: "/deco/lovestorydeco/Elegant-Eucalyptus-centerdot.png", // small sprig above titles
-  footerVine: "/deco/lovestorydeco/Elegant-Eucalyptus-bottom.png", // long vine at section ends
-  sideLeft: "/deco/lovestorydeco/Elegant-Eucalyptus-Left.png", // love story side sprigs
-  sideRight: "/deco/lovestorydeco/Elegant-Eucalyptus-Right.png",
+  cornerTopLeft: "/deco/BlueWatercolor-top-left.png",
+  cornerTopRight: "/deco/BlueWatercolor-top-right.png",
+  cornerBottomLeft: "/deco/BlueWatercolor-bottom-left.png",
+  cornerBottomRight: "/deco/BlueWatercolor-bottom-right.png",
+  headerOrnament: "/deco/lovestorydeco/Blue-Water-color-top.png", // small sprig above titles
+  footerVine: "/deco/lovestorydeco/Blue-Water-color-bottom.png", // long vine at section ends
+  sideLeft: "/deco/lovestorydeco/Blue-Water-color-left.png", // love story side sprigs
+  sideRight: "/deco/lovestorydeco/Blue-Water-color-right.png",
 }
 
 // The four corners as one set
@@ -334,8 +332,8 @@ export const siteConfig = {
     time: TIMES.ceremony,
     venue: CEREMONY_VENUE.name,
     tagline: "are getting married!!!!!",
-    theme: "Whimsical Spring Minimalist",
-    motif: "#FFCA8B, #FFB383, #F6CEC8, #E99997, #C8C29E",
+    theme: "Blue Minimalist",
+    motif: "rgb(8, 8, 7), rgb(11, 11, 9), rgb(14, 14, 11), rgb(17, 17, 13), rgb(20, 20, 15)",
   },
   // Opening "Save the Date" loading screen (components/loader/LoadingScreen.tsx).
   // Couple names, wedding date and ceremony details come from couple / wedding / ceremony above.
@@ -540,13 +538,17 @@ export const siteConfig = {
     // Cards, colors, images and which groups show → QUICK SETUP → ATTIRE
     attire: {
       title: "Attire Guidelines",
-      description: "Please dress according to the guidelines below.",
-      // Shown above a card's palette
-      paletteTitle: "Dress Code Palette",
-      paletteSubtitle: "Long Gown and Barong Tagalog",
-      colorGuideTitle: "Color Guide",
-      colorGuideNote: "Please refer to the exact colors below for dress code.",
-      // Order and visibility come from ATTIRE.show (skips blanks, typos and repeats)
+description: "Please dress according to the guidelines below.",
+
+// Shown above a card's palette
+paletteTitle: "Dress Code Palette",
+paletteSubtitle: "Casual Attire in Shades of Blue",
+
+colorGuideTitle: "Color Guide",
+colorGuideNote: "Please refer to the exact shades of blue below for the dress code.",
+
+// Order and visibility come from ATTIRE.show
+// (skips blanks, typos and repeats)
       groups: ATTIRE.show
         .filter((id, i, list) => ["sponsors", "entourage", "guests"].includes(id) && list.indexOf(id) === i)
         .map((id) => ({ id, ...ATTIRE[id] })),
@@ -560,36 +562,43 @@ export const siteConfig = {
       // showPalette: shows the dress code palette after the first paragraph
       items: [
         {
-          title: "Adults-Only Celebration",
+          title: "No Kids",
           variant: "accent" as "accent" | "soft",
           showPalette: false,
           paragraphs: [
-            "We kindly request that our wedding be an adults-only occasion. We hope this allows everyone to relax and fully enjoy the celebration with us.",
+            "While we adore your little ones, we've chosen to make our wedding an adults-only celebration. We hope you can enjoy a fun night out with us!",
+          ],
+        },
+        {
+          title: "Plus Ones",
+          variant: "soft" as "accent" | "soft",
+          showPalette: false,
+          paragraphs: [
+            "Due to limited space, we're only able to accommodate the guests specifically named on your invitation. Thank you for understanding.",
           ],
         },
         {
           title: "Unplugged Ceremony",
-          variant: "soft" as "accent" | "soft",
+          variant: "accent" as "accent" | "soft",
           showPalette: false,
           paragraphs: [
-            "We're having a mostly unplugged ceremony. Guests may take photos, but we kindly ask that it be kept minimal. Please avoid blocking or crowding our official photographers so they can capture the special moments. We'd love for everyone to stay present and share the moment with us. Don't worry—professional photos will be shared with you after the event. Thank you for your understanding.",
+            "We invite you to be fully present with us during our ceremony. Please silence and put away phones and cameras—we promise our photographer has it covered!",
           ],
         },
         {
-          title: "Strictly Formal",
-          variant: "accent" as "accent" | "soft",
-          showPalette: true,
+          title: "Dress Code",
+          variant: "soft" as "accent" | "soft",
+          showPalette: false,
           paragraphs: [
-            "Kindly follow our suggested attire and color palette above to match our wedding theme.",
-            "Strictly no casual clothes, shoes, or white-colored attire.",
+            "We can't wait to see everyone dressed up! We simply ask that shades of white, ivory and cream be saved for the bride.",
           ],
         },
         {
           title: "Arrival",
-          variant: "soft" as "accent" | "soft",
+          variant: "accent" as "accent" | "soft",
           showPalette: false,
           paragraphs: [
-            "To ensure everything runs smoothly, please arrive at {guestsTime}. This will give you enough time to find your seat, settle in comfortably, and fully enjoy the beautiful ceremony before it begins at {ceremonyTime}. We truly appreciate your punctuality and look forward to celebrating this special moment with you.",
+            "Our ceremony will begin promptly at {ceremonyTime}. We recommend arriving 20–30 minutes early so you have plenty of time to park, find your seat and get settled before we say \"I do\"!",
           ],
         },
       ],
@@ -918,9 +927,10 @@ export const siteConfig = {
   },
   // FAQ (components/sections/faq.tsx)
   // In answers you can use:
-  //   {deadline}    → details.rsvp.deadline
-  //   {coordinator} → details.rsvp.coordinator
-  //   {contact}     → " at <phone>" when details.rsvp.phone is set (empty while "to be announced")
+  //   {deadline}      → details.rsvp.deadline
+  //   {coordinator}   → details.rsvp.coordinator
+  //   {contact}       → " at <phone>" when details.rsvp.phone is set (empty while "to be announced")
+  //   {ceremonyTime}  → ceremony.time
   //   [link text](#section-id) → a link that smoothly scrolls to that section
   //   A blank line (\n\n) starts a new paragraph; lines starting with "• " show as a bulleted list
   faq: {
@@ -950,12 +960,27 @@ export const siteConfig = {
       {
         question: 'Can I bring a "Plus One" to the event?',
         answer:
-          "As much as we would love to accommodate all our friends and family, we have a limited number of guests. Please understand that this event is strictly by invitation only.",
+          "Due to limited space, we're only able to accommodate the guests specifically named on your invitation. Thank you for understanding.",
       },
       {
         question: "Can I bring my child to the event?",
         answer:
-          "If your invitation includes your child or children, they are warmly welcome to celebrate with us. Please RSVP with the correct number of guests in your party so we can prepare accordingly.",
+          "While we adore your little ones, we've chosen to make our wedding an adults-only celebration. We hope you can enjoy a fun night out with us!",
+      },
+      {
+        question: "Is the ceremony unplugged?",
+        answer:
+          "We invite you to be fully present with us during our ceremony. Please silence and put away phones and cameras—we promise our photographer has it covered!",
+      },
+      {
+        question: "What should I wear?",
+        answer:
+          "We can't wait to see everyone dressed up! We simply ask that shades of white, ivory and cream be saved for the bride.\n\nPlease see the [attire guide](#details) above for our full dress code and color palette.",
+      },
+      {
+        question: "What time should I arrive?",
+        answer:
+          "Our ceremony will begin promptly at {ceremonyTime}. We recommend arriving 20–30 minutes early so you have plenty of time to park, find your seat and get settled before we say \"I do\"!",
       },
       {
         question:
@@ -971,7 +996,7 @@ export const siteConfig = {
       {
         question: "Is there parking available?",
         answer:
-          "Yes, parking is available at both the ceremony and reception venues. Please arrive a little early so you have time to park comfortably.",
+          "Yes, parking is available at the venue. We recommend arriving 20–30 minutes before {ceremonyTime} so you have time to park, find your seat, and get settled.",
       },
       {
         question: "Can I take photos or videos during the reception?",
@@ -1031,9 +1056,9 @@ export const siteConfig = {
     showAccounts: true,
     accountsTitle: "For e-gifts",
     accounts: [
-      { show: true, label: "BDO", accountName: "Mair", accountNumber: "***63434", qr: "/QR/BDO.png" },
+      { show: true, label: "BDO", accountName: "Jhanrel", accountNumber: "***********9172", qr: "/QR/BDO.png" },
       { show: false, label: "MariBank", accountName: "", accountNumber: "", qr: "" },
-      { show: true, label: "GCash", accountName: "Mair", accountNumber: "***63434", qr: "/QR/BDO.png" },
+      { show: true, label: "LandBank", accountName: "Jhanrel Ballocanag", accountNumber: "xxxxxxx7434", qr: "/QR/LandBank.png" },
     ] as { show: boolean; label: string; accountName: string; accountNumber: string; qr: string }[],
     // Leave any path "" to hide that decoration
     decos: { ...SECTION_DECOS },
@@ -1045,7 +1070,7 @@ export const siteConfig = {
     // {couple} → "Groom & Bride" nicknames. "" hides a line or image.
     qrCard: {
       coupleNameImage: BRAND.coupleNameImage, // couple-name lettering; "" shows the names as text
-      coupleImage: "/deco/coupleImage.png", // couple illustration beside the text
+      coupleImage: "Details/couple.png", // couple illustration beside the text
       eyebrow: "The wedding of",
       title: "Find Your Table",
       script: "please be seated",
@@ -1068,7 +1093,7 @@ export const siteConfig = {
   proposal: {
     decos: { ...CORNER_DECOS },
     coupleNameImage: BRAND.coupleNameImage, // couple-name lettering at the top of the card; "" shows text names
-    coupleImage: "/deco/coupleImage.png", // couple illustration above the question
+    coupleImage: "/Details/couple.png", // couple illustration above the question
     ornament: DECOR.headerOrnament, // small sprig at the top of the card; "" to hide
     // Eucalyptus sprigs on either side of the couple name; "" to hide one
     nameDecos: { left: DECOR.sideLeft, right: DECOR.sideRight },
@@ -1285,27 +1310,27 @@ export const siteConfig = {
     groomPhone: "to be announced",
     email: "to be announced",
   },
-  giftRegistry: {
-    QR_1:{
-    id: "BPI",
-    src: "/QR/BPI.png",
-    label: "BPI",
-    accountNumber: "KAMS : ***********569",
-    },
-    QR_2:{
-    id: "MariBank",
-    src: "/QR/MariBank.png",
-    label: "MariBank",
-    accountNumber: "****7672",
-    }
-    // ,
-    // QR_3:{
-    // id: "Gcash",
-    // src: "/QR/pleaseProvideQR.png",
-    // label: "Gcash",
-    // accountNumber: "to be announced",
-    // }
-  },
+  // giftRegistry: {
+  //   QR_1:{
+  //   id: "BPI",
+  //   src: "/QR/BPI.png",
+  //   label: "BPI",
+  //   accountNumber: "KAMS : ***********569",
+  //   },
+  //   QR_2:{
+  //   id: "MariBank",
+  //   src: "/QR/MariBank.png",
+  //   label: "MariBank",
+  //   accountNumber: "****7672",
+  //   }
+  //   ,
+  //   QR_3:{
+  //   id: "Gcash",
+  //   src: "/QR/pleaseProvideQR.png",
+  //   label: "Gcash",
+  //   accountNumber: "to be announced",
+  //   }
+  // },
   // Built from QUICK SETUP — edit the values at the top of the file
   ceremony: {
     location: CEREMONY_VENUE.name,
@@ -1413,9 +1438,9 @@ Now, as they prepare to say yes before God and the people they love most, Cather
     // Leave any path "" to hide that decoration
     decos: { ...CORNER_DECOS, headerOrnament: DECOR.headerOrnament },
     embedUrl:
-    //https://open.spotify.com/embed/playlist/2AhKS56CXqBWMYYNrnWrsR?utm_source=generator&si=2beaa29421e94943
-      "https://open.spotify.com/embed/playlist/3w7n13w5TSNG0rFnEDIEmS?utm_source=generator&si=3321c2d9883746b5",
-    spotifyUrl: "https://open.spotify.com/playlist/3w7n13w5TSNG0rFnEDIEmS",
+    //https://open.spotify.com/embed/playlist/2kBlhGzzNIYxbn9WOqavnj?utm_source=generator&si=4550d9101c2c4cce
+      "https://open.spotify.com/embed/playlist/2kBlhGzzNIYxbn9WOqavnj?utm_source=generator&si=4550d9101c2c4cce",
+    spotifyUrl: "https://open.spotify.com/playlist/2kBlhGzzNIYxbn9WOqavnj",
   },
   // Closing "See you there!" section (components/sections/see-you-there.tsx).
   //   photos mode (loadingScreen.display "photos") → full-screen couple photo

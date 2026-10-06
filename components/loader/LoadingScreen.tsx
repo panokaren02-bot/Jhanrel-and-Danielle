@@ -17,6 +17,10 @@ interface LoadingScreenProps {
 const STAGGER_DELAY_MS = 1100;
 const FIRST_BOX_DELAY_MS = 600;
 const BOX_TRANSITION_MS = 1100;
+/** Plain silk date — follows couple-name reveal (~450ms + 1s animation) */
+const PLAIN_DATE_FIRST_MS = 720;
+const PLAIN_DATE_STAGGER_MS = 380;
+const PLAIN_DATE_STEPS = 4;
 const FADE_OUT_MS = 1400;
 const MS_PER_DAY = 1000 * 60 * 60 * 24;
 
@@ -112,15 +116,21 @@ export const LoadingScreen: React.FC<LoadingScreenProps> = ({ onComplete, onFade
 
   useEffect(() => {
     if (reduceMotion) {
-      setVisibleBoxes(dateParts.length);
+      setVisibleBoxes(isPlain && hasValidDate ? PLAIN_DATE_STEPS : dateParts.length);
       return;
     }
+    if (isPlain && hasValidDate) {
+      const timers = Array.from({ length: PLAIN_DATE_STEPS }, (_, i) =>
+        setTimeout(() => setVisibleBoxes(i + 1), PLAIN_DATE_FIRST_MS + i * PLAIN_DATE_STAGGER_MS),
+      );
+      return () => timers.forEach(clearTimeout);
+    }
+    if (dateParts.length === 0) return;
     const timers = dateParts.map((_, i) =>
       setTimeout(() => setVisibleBoxes(i + 1), FIRST_BOX_DELAY_MS + i * STAGGER_DELAY_MS),
     );
     return () => timers.forEach(clearTimeout);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [reduceMotion, dateParts.length]);
+  }, [reduceMotion, isPlain, hasValidDate, dateParts.length]);
 
   useEffect(() => {
     if (statusMessages.length < 2) return;
@@ -264,18 +274,25 @@ export const LoadingScreen: React.FC<LoadingScreenProps> = ({ onComplete, onFade
         )}
 
         {isPlain && silkDate && (
-          <div className="ls-silk-date px-4 pt-1 pb-3 sm:pb-4 flex-shrink-0" role="img" aria-label={silkDate.label}>
+          <div
+            className="ls-silk-date px-4 pt-1 pb-3 sm:pb-4 flex-shrink-0"
+            role="img"
+            aria-label={silkDate.label}
+          >
             <p className={`ls-silk-date__weekday${visibleBoxes >= 1 ? ' is-visible' : ''}`}>
               {silkDate.weekday}
             </p>
-            <div className="ls-silk-date__row">
-              <span className={`ls-silk-date__side${visibleBoxes >= 1 ? ' is-visible' : ''}`}>
+            <div
+              className={`ls-silk-date__row${visibleBoxes >= 2 ? ' is-visible' : ''}`}
+              aria-hidden={visibleBoxes < 2}
+            >
+              <span className={`ls-silk-date__side ls-silk-date__side--month${visibleBoxes >= 2 ? ' is-visible' : ''}`}>
                 {silkDate.month}
               </span>
-              <span className={`ls-silk-date__day${visibleBoxes >= 2 ? ' is-visible' : ''}`}>
+              <span className={`ls-silk-date__day${visibleBoxes >= 3 ? ' is-visible' : ''}`}>
                 {silkDate.day}
               </span>
-              <span className={`ls-silk-date__side${visibleBoxes >= 3 ? ' is-visible' : ''}`}>
+              <span className={`ls-silk-date__side ls-silk-date__side--year${visibleBoxes >= 4 ? ' is-visible' : ''}`}>
                 {silkDate.year}
               </span>
             </div>

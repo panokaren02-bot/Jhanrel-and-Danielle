@@ -51,8 +51,8 @@
   --env-ratio: 1.48;
   --env-width: min(88vw, 420px);
   --env-seal-size: clamp(86px, calc(var(--env-width) * 0.24), 132px);
-  --env-letter-w: clamp(180px, calc(var(--env-width) * 0.4), 300px);
-  --env-letter-h: clamp(220px, calc(var(--env-width) * 0.5), 360px);
+  --env-letter-w: clamp(204px, calc(var(--env-width) * 0.46), 340px);
+  --env-letter-h: clamp(252px, calc(var(--env-width) * 0.56), 410px);
   --env-polaroid-w: clamp(104px, calc(var(--env-width) * 0.24), 176px);
   --env-polaroid-h: clamp(104px, calc(var(--env-width) * 0.24), 176px);
   --env-photos-band: min(calc(var(--env-width) * 0.92), 440px);
@@ -730,9 +730,9 @@
 .env-invite-letter-names {
   position: relative;
   display: block;
-  width: calc(100% - 2.4rem);
+  width: calc(100% + 2.2rem);
   aspect-ratio: 2161 / 728;
-  margin: 0.35em 1.2rem 0.55em;
+  margin: 0.35em -1.1rem 0.55em;
   flex-shrink: 0;
   background: linear-gradient(
     118deg,
@@ -1241,8 +1241,7 @@
   box-shadow: none;
   -webkit-tap-highlight-color: transparent;
   overflow: visible;
-  filter: drop-shadow(0 8px 16px rgba(91, 74, 55, 0.22))
-    drop-shadow(0 2px 5px rgba(154, 126, 74, 0.28));
+  filter: none;
 }
 
 .env-invite-seal-img {
@@ -1250,6 +1249,9 @@
   object-fit: contain;
   pointer-events: none;
   user-select: none;
+  filter:
+    drop-shadow(0 1px 1px rgba(42, 50, 40, 0.1))
+    drop-shadow(0 4px 10px rgba(42, 50, 40, 0.12));
 }
 
 .env-invite-seal-letter {
@@ -1271,28 +1273,6 @@
 .env-invite-seal-letter-k {
   font-size: 27px;
   letter-spacing: -0.03em;
-}
-
-.env-invite-screen[data-phase="idle"] .env-invite-seal-btn {
-  animation: env-seal-breathe 2.8s ease-in-out infinite;
-}
-
-@keyframes env-seal-breathe {
-  0%,
-  100% {
-    filter: drop-shadow(0 8px 16px rgba(91, 74, 55, 0.22))
-      drop-shadow(0 2px 5px rgba(154, 126, 74, 0.28));
-  }
-  50% {
-    filter: drop-shadow(0 12px 22px rgba(180, 154, 104, 0.38))
-      drop-shadow(0 4px 10px rgba(91, 74, 55, 0.22));
-  }
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .env-invite-screen[data-phase="idle"] .env-invite-seal-btn {
-    animation: none;
-  }
 }
 
 .env-invite-seal-btn:disabled {
@@ -1892,6 +1872,11 @@
     right: 0%;
     bottom: 31%;
   }
+
+  .env-invite-letter-names {
+    width: calc(100% + 3.2rem);
+    margin: 0.22em -1.6rem 0.4em;
+  }
 }
 
 /* Reveal / CTA — keep the rectangular envelope size on mobile */
@@ -2120,8 +2105,8 @@
   }
 
   .env-invite-letter-names {
-    width: calc(100% - 3rem);
-    margin: 0.25em 1.5rem 0.4em;
+    width: calc(100% + 2.8rem);
+    margin: 0.25em -1.4rem 0.4em;
   }
 
   .env-invite-screen[data-phase="rising"] .env-invite-emerge-stack,
@@ -2216,8 +2201,8 @@
     --env-width: min(62vw, 380px);
     --env-flap-h: 58%;
     --env-seal-size: clamp(80px, calc(var(--env-width) * 0.22), 124px);
-    --env-letter-w: clamp(180px, calc(var(--env-width) * 0.38), 280px);
-    --env-letter-h: clamp(230px, calc(var(--env-width) * 0.52), 360px);
+    --env-letter-w: clamp(196px, calc(var(--env-width) * 0.44), 320px);
+    --env-letter-h: clamp(248px, calc(var(--env-width) * 0.56), 390px);
     --env-polaroid-w: clamp(96px, calc(var(--env-width) * 0.22), 156px);
     --env-polaroid-h: clamp(96px, calc(var(--env-width) * 0.22), 156px);
     --env-photos-band: min(calc(var(--env-width) * 0.86), 360px);
@@ -2251,8 +2236,8 @@
   --env-plain-bg: var(--color-welcome-bg);
   --env-plain-ink: var(--color-welcome-text);
   --env-plain-accent: var(--color-welcome-gold);
-  --env-letter-w: clamp(228px, calc(var(--env-width) * 0.58), 360px);
-  --env-letter-h: clamp(268px, calc(var(--env-width) * 0.66), 420px);
+  --env-letter-w: clamp(252px, calc(var(--env-width) * 0.66), 420px);
+  --env-letter-h: clamp(288px, calc(var(--env-width) * 0.72), 460px);
   background: transparent;
 }
 
@@ -2346,9 +2331,9 @@
 }
 
 .env-invite-screen--plain .env-invite-letter-names {
-  width: calc(100% - 0.5rem);
-  min-height: clamp(2.75rem, calc(var(--env-letter-w) * 0.24), 4.25rem);
-  margin: 0.2em 0 0.35em;
+  width: calc(100% + 1.4rem);
+  min-height: clamp(3.75rem, calc(var(--env-letter-w) * 0.38), 7.25rem);
+  margin: 0.15em -0.7rem 0.3em;
   background: linear-gradient(
     118deg,
     var(--couple-name-fill, var(--color-welcome-navy)) 0%,
@@ -2421,8 +2406,8 @@
 
 @media (min-width: 768px) {
   .env-invite-screen--plain {
-    --env-letter-w: clamp(260px, calc(var(--env-width) * 0.54), 380px);
-    --env-letter-h: clamp(300px, calc(var(--env-width) * 0.62), 440px);
+    --env-letter-w: clamp(288px, calc(var(--env-width) * 0.62), 440px);
+    --env-letter-h: clamp(328px, calc(var(--env-width) * 0.7), 500px);
   }
 
   .env-invite-screen--plain .env-invite-emerge-stack .env-invite-letter,
@@ -2454,9 +2439,23 @@
 
 @media (max-width: 767px) {
   .env-invite-screen--plain {
-    --env-letter-w: clamp(240px, calc(var(--env-width) * 0.62), 360px);
-    --env-letter-h: clamp(280px, calc(var(--env-width) * 0.7), 420px);
+    --env-letter-w: clamp(292px, calc(var(--env-width) * 0.84), 440px);
+    --env-letter-h: clamp(332px, calc(var(--env-width) * 0.88), 500px);
     background: var(--env-plain-bg);
+  }
+
+  .env-invite-screen--plain .env-invite-letter-inner {
+    gap: 0.34em;
+    padding:
+      clamp(0.45rem, calc(var(--env-letter-w) * 0.048), 0.9rem)
+      clamp(0.3rem, calc(var(--env-letter-w) * 0.028), 0.65rem)
+      clamp(0.75rem, calc(var(--env-letter-w) * 0.075), 1.15rem);
+  }
+
+  .env-invite-screen--plain .env-invite-letter-names {
+    width: calc(100% + 2.6rem);
+    min-height: clamp(4.5rem, calc(var(--env-letter-w) * 0.46), 9rem);
+    margin: 0.06em -1.3rem 0.2em;
   }
 
   .env-invite-screen--plain .env-invite-emerge-stack .env-invite-letter,

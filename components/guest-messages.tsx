@@ -72,16 +72,16 @@ function MessageCard({ msg }: { msg: Message }) {
   }
 
   return (
-    <article className="group relative flex flex-col rounded-2xl border border-[#DDE5D4] bg-white p-4 shadow-sm transition-shadow hover:shadow-md sm:p-5">
+    <article className="group relative flex flex-col rounded-2xl border border-[#DDE5F0] bg-white p-4 shadow-sm transition-shadow hover:shadow-md sm:p-5">
       <header className="flex items-start gap-3">
         <span
-          className={`${cinzel.className} flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-gradient-to-br from-[#AAB9A0] to-[#4F674D] text-sm font-semibold text-white shadow-sm`}
+          className={`${cinzel.className} flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-gradient-to-br from-[#AFBED7] to-[#4F6381] text-sm font-semibold text-white shadow-sm`}
           aria-hidden
         >
           {initials(name)}
         </span>
         <div className="min-w-0 flex-1">
-          <h3 className={`${playfair.className} truncate text-base font-semibold text-[#304A34] sm:text-lg`}>{name}</h3>
+          <h3 className={`${playfair.className} truncate text-base font-semibold text-[#2F3B57] sm:text-lg`}>{name}</h3>
           <p className="mt-0.5 flex items-center gap-1 text-[11px] text-gray-500 sm:text-xs" title={formatFullDate(msg.timestamp)}>
             <Clock className="h-3 w-3 shrink-0" />
             {formatRelative(msg.timestamp)}
@@ -93,18 +93,18 @@ function MessageCard({ msg }: { msg: Message }) {
           aria-label={copied ? "Copied" : `Copy message from ${name}`}
           className={`flex h-8 w-8 shrink-0 items-center justify-center rounded-full border transition-colors ${
             copied
-              ? "border-[#718566] bg-[#718566] text-white"
-              : "border-[#DDE5D4] bg-white text-gray-400 hover:text-[#4F674D] sm:opacity-0 sm:group-hover:opacity-100 sm:focus:opacity-100"
+              ? "border-[#607CA6] bg-[#607CA6] text-white"
+              : "border-[#DDE5F0] bg-white text-gray-400 hover:text-[#4F6381] sm:opacity-0 sm:group-hover:opacity-100 sm:focus:opacity-100"
           }`}
         >
           {copied ? <Check className="h-3.5 w-3.5" /> : <Copy className="h-3.5 w-3.5" />}
         </button>
       </header>
 
-      <div className="relative mt-3 flex-1 rounded-xl border border-[#EEF2EA] bg-gradient-to-br from-[#FBFCF7] to-[#F4F5EA] px-4 pt-4 pb-3">
-        <Quote className="absolute left-3 top-3 h-5 w-5 rotate-180 text-[#C3CFB8]" aria-hidden />
+      <div className="relative mt-3 flex-1 rounded-xl border border-[#EBF0F7] bg-gradient-to-br from-[#FBFAF7] to-[#F3F1EC] px-4 pt-4 pb-3">
+        <Quote className="absolute left-3 top-3 h-5 w-5 rotate-180 text-[#C3CEE0]" aria-hidden />
         <p
-          className={`${playfair.className} whitespace-pre-wrap pl-6 text-[0.95rem] italic leading-relaxed text-[#304A34] [overflow-wrap:anywhere] sm:text-base ${
+          className={`${playfair.className} whitespace-pre-wrap pl-6 text-[0.95rem] italic leading-relaxed text-[#2F3B57] [overflow-wrap:anywhere] sm:text-base ${
             isLong && !expanded ? "line-clamp-5" : ""
           }`}
         >
@@ -115,7 +115,7 @@ function MessageCard({ msg }: { msg: Message }) {
             type="button"
             onClick={() => setExpanded((v) => !v)}
             aria-expanded={expanded}
-            className="mt-2 pl-6 text-xs font-semibold text-[#4F674D] underline-offset-4 hover:underline"
+            className="mt-2 pl-6 text-xs font-semibold text-[#4F6381] underline-offset-4 hover:underline"
           >
             {expanded ? "Show less" : "Read more"}
           </button>
@@ -175,7 +175,7 @@ export function GuestMessages({ messages, onRefresh, isLoading = false }: GuestM
           type="button"
           onClick={() => void handleRefresh()}
           disabled={busy}
-          className="inline-flex items-center gap-1.5 rounded-full border border-[#DDE5D4] bg-white px-3 py-1.5 text-xs font-medium text-[#4F674D] transition-colors hover:bg-[#F7F9F4] disabled:opacity-50"
+          className="inline-flex items-center gap-1.5 rounded-full border border-[#DDE5F0] bg-white px-3 py-1.5 text-xs font-medium text-[#4F6381] transition-colors hover:bg-[#F6F8FB] disabled:opacity-50"
         >
           <RefreshCw className={`h-3.5 w-3.5 ${busy ? "animate-spin" : ""}`} />
           Refresh
@@ -191,7 +191,7 @@ export function GuestMessages({ messages, onRefresh, isLoading = false }: GuestM
       {/* Stats */}
       <div className="grid grid-cols-2 gap-2.5 sm:gap-4 lg:grid-cols-4">
         {[
-          { label: "Messages", value: stats.total, tone: "border-[#DDE5D4] bg-white text-[#4F674D]" },
+          { label: "Messages", value: stats.total, tone: "border-[#DDE5F0] bg-white text-[#4F6381]" },
           { label: "From guests", value: stats.guests, tone: "border-green-200 bg-green-50 text-green-700" },
           { label: "This week", value: stats.thisWeek, tone: "border-amber-200 bg-amber-50 text-amber-700" },
           { label: "Heartfelt (100+ chars)", value: stats.long, tone: "border-purple-200 bg-purple-50 text-purple-700" },
@@ -204,11 +204,11 @@ export function GuestMessages({ messages, onRefresh, isLoading = false }: GuestM
       </div>
 
       {/* Explainer */}
-      <div className="flex gap-3 rounded-xl border border-[#DDE5D4] bg-[#F7F9F4] p-3 sm:p-4">
-        <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-white text-[#4F674D] shadow-sm ring-1 ring-[#DDE5D4]">
+      <div className="flex gap-3 rounded-xl border border-[#DDE5F0] bg-[#F6F8FB] p-3 sm:p-4">
+        <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-white text-[#4F6381] shadow-sm ring-1 ring-[#DDE5F0]">
           <Heart className="h-4 w-4" />
         </span>
-        <p className="text-xs leading-relaxed text-[#4B5B49] sm:text-sm">
+        <p className="text-xs leading-relaxed text-[#4F6381] sm:text-sm">
           Well wishes your guests left on your invitation. Tap the copy icon to save a favourite for your keepsake book.
         </p>
       </div>
@@ -222,16 +222,16 @@ export function GuestMessages({ messages, onRefresh, isLoading = false }: GuestM
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
             placeholder="Search by guest or words..."
-            className="w-full rounded-lg border border-[#DDE5D4] bg-white py-2.5 pl-10 pr-4 outline-none focus:ring-2 focus:ring-[#9EAF91]"
+            className="w-full rounded-lg border border-[#DDE5F0] bg-white py-2.5 pl-10 pr-4 outline-none focus:ring-2 focus:ring-[#97A5BD]"
           />
         </div>
         <button
           type="button"
           onClick={() => setNewestFirst((v) => !v)}
-          className="inline-flex shrink-0 items-center gap-1.5 rounded-lg border border-[#DDE5D4] bg-white px-3 text-xs font-medium text-[#304A34] transition-colors hover:bg-[#F7F9F4] sm:text-sm"
+          className="inline-flex shrink-0 items-center gap-1.5 rounded-lg border border-[#DDE5F0] bg-white px-3 text-xs font-medium text-[#2F3B57] transition-colors hover:bg-[#F6F8FB] sm:text-sm"
           aria-label={`Sort: ${newestFirst ? "newest first" : "oldest first"}`}
         >
-          <ArrowDownUp className="h-4 w-4 text-[#718566]" />
+          <ArrowDownUp className="h-4 w-4 text-[#607CA6]" />
           {newestFirst ? "Newest" : "Oldest"}
         </button>
       </div>
@@ -244,17 +244,17 @@ export function GuestMessages({ messages, onRefresh, isLoading = false }: GuestM
 
       {/* List */}
       {busy && messages.length === 0 ? (
-        <div className="rounded-xl border border-[#DDE5D4] bg-white px-6 py-12 text-center">
-          <div className="mx-auto mb-4 h-12 w-12 animate-spin rounded-full border-4 border-[#DDE5D4] border-t-[#4F674D]" />
-          <h3 className={`${playfair.className} text-lg font-semibold text-[#304A34]`}>Loading messages…</h3>
+        <div className="rounded-xl border border-[#DDE5F0] bg-white px-6 py-12 text-center">
+          <div className="mx-auto mb-4 h-12 w-12 animate-spin rounded-full border-4 border-[#DDE5F0] border-t-[#4F6381]" />
+          <h3 className={`${playfair.className} text-lg font-semibold text-[#2F3B57]`}>Loading messages…</h3>
           <p className="mt-1 text-sm text-gray-500">Gathering your guests&apos; well wishes.</p>
         </div>
       ) : visibleMessages.length === 0 ? (
-        <div className="rounded-xl border border-[#DDE5D4] bg-white px-6 py-12 text-center">
-          <span className="mx-auto mb-3 flex h-14 w-14 items-center justify-center rounded-full bg-[#F7F9F4]">
-            <MessageSquare className="h-7 w-7 text-[#AAB9A0]" />
+        <div className="rounded-xl border border-[#DDE5F0] bg-white px-6 py-12 text-center">
+          <span className="mx-auto mb-3 flex h-14 w-14 items-center justify-center rounded-full bg-[#F6F8FB]">
+            <MessageSquare className="h-7 w-7 text-[#AFBED7]" />
           </span>
-          <h3 className={`${playfair.className} text-lg font-semibold text-[#304A34]`}>
+          <h3 className={`${playfair.className} text-lg font-semibold text-[#2F3B57]`}>
             {searchQuery ? "No matching messages" : "No messages yet"}
           </h3>
           <p className="mt-1 text-sm text-gray-500">

@@ -6,6 +6,7 @@ import { motion, useReducedMotion, type Variants } from "motion/react"
 import { Cinzel } from "next/font/google"
 import localFont from "next/font/local"
 import { useSiteConfig } from "@/hooks/use-site-config"
+import { siteConfig as defaultSiteConfig } from "@/content/site"
 import { layeredSectionTitleSize, sectionType } from "@/lib/section-typography"
 
 const cinzel = Cinzel({
@@ -192,6 +193,9 @@ export function FAQ() {
   const rsvp = siteConfig.details.rsvp
   const rsvpPhone = rsvp.phone.trim()
   const showRsvpPhone = rsvpPhone.length > 0 && !/to be announced/i.test(rsvpPhone)
+  const ceremonyTime =
+    siteConfig.ceremony.time ?? siteConfig.wedding.time ?? defaultSiteConfig.ceremony.time
+
   const fillAnswer = (text: string) =>
     text
       .split("{deadline}").join(rsvp.deadline.replace(/\.\s*$/, ""))
@@ -200,6 +204,7 @@ export function FAQ() {
       .split("{groom}").join(siteConfig.couple.groomNickname || siteConfig.couple.groom)
       .split("{bride}").join(siteConfig.couple.brideNickname || siteConfig.couple.bride)
       .split("{contact}").join(showRsvpPhone ? ` at ${rsvpPhone}` : "")
+      .split("{ceremonyTime}").join(ceremonyTime)
 
   const initial = reduceMotion ? false : "hidden"
 

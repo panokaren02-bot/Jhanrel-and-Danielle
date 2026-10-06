@@ -425,17 +425,17 @@ export default function DashboardPage() {
   // Login Screen
   if (!isAuthenticated) {
     return (
-      <div className="dashboard-root min-h-screen bg-gradient-to-br from-[#FBFCF7] to-[#F4F5EA] flex items-center justify-center p-4">
+      <div className="dashboard-root min-h-screen bg-gradient-to-br from-[#FBFAF7] to-[#F3F1EC] flex items-center justify-center p-4">
         <div className="w-full max-w-md">
           <div className="bg-white rounded-2xl p-6 sm:p-8 shadow-xl border border-[#E5E7EB]">
             <div className="text-center mb-8">
-              <div className="inline-flex items-center justify-center w-16 h-16 bg-gradient-to-br from-[#4F674D] to-[#304A34] rounded-2xl mb-4 shadow-lg">
+              <div className="inline-flex items-center justify-center w-16 h-16 bg-gradient-to-br from-[#4F6381] to-[#2F3B57] rounded-2xl mb-4 shadow-lg">
                 <Lock className="h-8 w-8 text-white" />
               </div>
               <div className="mb-2">
-                <span className="font-serif text-sm text-[#718566]">♥</span>
-                <span className="font-serif text-2xl font-bold text-[#304A34] mx-2">Wedding Invitation</span>
-                <span className="font-serif text-sm text-[#718566]">♥</span>
+                <span className="font-serif text-sm text-[#607CA6]">♥</span>
+                <span className="font-serif text-2xl font-bold text-[#2F3B57] mx-2">Wedding Invitation</span>
+                <span className="font-serif text-sm text-[#607CA6]">♥</span>
               </div>
               <h1 className="text-2xl font-bold text-[#111827] mb-2">
                 Admin Dashboard
@@ -454,7 +454,7 @@ export default function DashboardPage() {
                   type="password"
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
-                  className="w-full px-4 py-3 border border-[#E5E7EB] rounded-lg focus:ring-2 focus:ring-[#718566] focus:border-transparent outline-none transition-all"
+                  className="w-full px-4 py-3 border border-[#E5E7EB] rounded-lg focus:ring-2 focus:ring-[#607CA6] focus:border-transparent outline-none transition-all"
                   placeholder="Enter password"
                   autoFocus
                 />
@@ -469,7 +469,7 @@ export default function DashboardPage() {
 
               <Button
                 type="submit"
-                className="w-full bg-gradient-to-r from-[#4F674D] to-[#304A34] hover:from-[#304A34] hover:to-[#4F674D] text-white py-6 rounded-lg font-medium transition-all shadow-md hover:shadow-lg"
+                className="w-full bg-gradient-to-r from-[#4F6381] to-[#2F3B57] hover:from-[#2F3B57] hover:to-[#4F6381] text-white py-6 rounded-lg font-medium transition-all shadow-md hover:shadow-lg"
               >
                 Access Dashboard
               </Button>
@@ -501,17 +501,17 @@ export default function DashboardPage() {
             <button
               type="button"
               onClick={() => setMobileNavOpen(true)}
-              className="-ml-1.5 rounded-lg p-2 text-[#304A34] hover:bg-[#F9FAFB] lg:hidden"
+              className="-ml-1.5 rounded-lg p-2 text-[#2F3B57] hover:bg-[#F9FAFB] lg:hidden"
               aria-label="Open menu"
             >
               <Menu className="h-5 w-5" />
             </button>
             <div className="min-w-0 flex-1">
-              <p className={`${cinzel.className} text-[9.5px] font-semibold uppercase tracking-[0.24em] text-[#8A9A82] sm:text-[10.5px]`}>
+              <p className={`${cinzel.className} text-[9.5px] font-semibold uppercase tracking-[0.24em] text-[#97A5BD] sm:text-[10.5px]`}>
                 Welcome back
               </p>
-              <h1 className={`${playfair.className} truncate text-[1.05rem] font-semibold leading-tight text-[#304A34] sm:text-xl`}>
-                {siteConfig.couple.groomNickname} <span className="italic text-[#718566]">&amp;</span> {siteConfig.couple.brideNickname}
+              <h1 className={`${playfair.className} truncate text-[1.05rem] font-semibold leading-tight text-[#2F3B57] sm:text-xl`}>
+                {siteConfig.couple.groomNickname} <span className="italic text-[#607CA6]">&amp;</span> {siteConfig.couple.brideNickname}
               </h1>
             </div>
             <div className="flex shrink-0 items-center gap-2 sm:gap-3">
@@ -520,7 +520,7 @@ export default function DashboardPage() {
                 disabled={isLoading}
                 size="sm"
                 variant="outline"
-                className="border-[#E5E7EB] text-[#6B7280] hover:text-[#304A34] hover:border-[#718566]"
+                className="border-[#E5E7EB] text-[#6B7280] hover:text-[#2F3B57] hover:border-[#607CA6]"
               >
                 <RefreshCw className={`h-4 w-4 sm:mr-2 ${isLoading ? 'animate-spin' : ''}`} />
                 <span className="hidden sm:inline">Refresh Data</span>

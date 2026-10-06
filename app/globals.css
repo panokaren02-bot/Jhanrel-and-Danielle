@@ -148,25 +148,51 @@
   
 /* ==========================================
    MOTIF COLORS
-   Theme: Sage Green Botanical
-   Ivory + Sage + Olive + Deep Forest
+   Theme: Classic Elegant Blue
+   Ivory + Navy + Dusty Blue + Powder Blue
    ========================================== */
 
 /* Background / Linen */
---color-motif-cream: #F4F5EA; /* Soft ivory */
---color-motif-yellow: #9EAF91; /* Muted sage */
---color-motif-soft: #FBFCF7; /* Warm white */
+--color-motif-cream: #F3F1EC; /* Warm ivory */
+--color-motif-yellow: #97A5BD; /* Soft dusty blue */
+--color-motif-soft: #FBFAF7; /* Soft warm white */
 
-/* Sage Green Accents */
---color-motif-accent: #718566; /* Olive sage */
---color-motif-deep: #4F674D; /* Deep botanical green */
---color-motif-medium: #AAB9A0; /* Soft sage */
 
-/* Floral Accent */
---color-motif-blush: #C3CFB8; /* Sage beige */
+/* ==========================================
+   BLUE ACCENTS
+   ========================================== */
 
-/* Neutral / Paper */
---color-motif-silver: #DDE5D4; /* Pale sage */
+/* Primary elegant blue */
+--color-motif-accent: #607CA6; /* Dusty blue */
+
+/* Deep elegant navy */
+--color-motif-deep: #2F3B57; /* Deep navy */
+
+/* Medium blue */
+--color-motif-medium: #4F6381; /* Classic muted blue */
+
+
+/* ==========================================
+   FLORAL / ROMANTIC ACCENT
+   ========================================== */
+
+/* Soft powder blue */
+--color-motif-blush: #AFBED7; /* Powder blue */
+
+
+/* ==========================================
+   NEUTRAL / PAPER
+   ========================================== */
+
+--color-motif-silver: #DDE5F0; /* Pale blue */
+
+
+/* ==========================================
+   WARM SECONDARY ACCENT
+   ========================================== */
+
+--color-motif-warm: #E8B190; /* Subtle champagne/blush */
+--color-motif-taupe: #AF8C78; /* Warm taupe */
 
 
 /* ==========================================
@@ -195,24 +221,24 @@
    ========================================== */
 
 /* Main body text */
---color-welcome-text: #4F674D; /* Deep sage */
+--color-welcome-text: #2F3B57; /* Deep navy */
 
 /* Secondary / softer text */
 --color-welcome-text-soft:
     color-mix(
         in srgb,
-        #4F674D 65%,
+        #2F3B57 65%,
         white
     );
 
 /* Small headings */
---color-welcome-heading: #718566; /* Olive sage */
+--color-welcome-heading: #607CA6; /* Dusty blue */
 
 /* Script / romantic accent */
---color-welcome-script: #718566; /* Elegant sage */
+--color-welcome-script: #4F6381; /* Elegant muted blue */
 
 /* Main hero heading */
---color-welcome-navy: #304A34; /* Deep forest */
+--color-welcome-navy: #2F3B57; /* Deep navy */
 
 
 /* ==========================================
@@ -220,23 +246,29 @@
    ========================================== */
 
 /* Buttons */
---color-welcome-green: #4F674D; /* Deep botanical */
+--color-welcome-green: #2F3B57; 
+/* Deep navy — retained variable name for compatibility */
 
-/* Decorative botanical lines */
---color-welcome-botanical: #718566; /* Olive sage */
+/* Decorative botanical/floral lines */
+--color-welcome-botanical: #607CA6; /* Dusty blue */
 
 /* Gold decorative details */
---color-welcome-gold: #9EAF91; /* Muted sage */
+--color-welcome-gold: #97A5BD; /* Soft blue */
 
 /* Floral accents */
---color-welcome-blush: #C3CFB8; /* Soft sage beige */
+--color-welcome-blush: #AFBED7; /* Powder blue */
 
-/* Couple-name mask lockup (loader, hero, sections) */
+
+/* ==========================================
+   COUPLE NAME MASK LOCKUP
+   ========================================== */
+
 --couple-name-fill: var(--color-welcome-navy);
 --couple-name-fill-mid: var(--color-motif-deep);
 --couple-name-fill-accent: var(--color-welcome-heading);
 --couple-name-fill-soft: var(--color-motif-soft);
-  /* ─────────────────────────────────────────────────────────── */
+
+
   --font-imperial-script: "Imperial Script", cursive;
   --font-anastasia-script: "CoupleAnastasia";
   --font-beautiful-malera: "Beautiful Malera", cursive;

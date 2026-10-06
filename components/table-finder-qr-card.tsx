@@ -43,7 +43,7 @@ const HAIRLINE = "linear-gradient(to right, transparent, color-mix(in srgb, var(
 
 // QR canvases can't read CSS variables — use real colors.
 // Dots use the motif green (read from --color-motif-deep at runtime), on pure white.
-const QR_FG_FALLBACK = "#4F674D" // --color-motif-deep
+const QR_FG_FALLBACK = "#4F6381" // --color-motif-deep
 const QR_BG = "#FFFFFF"
 const PRINT_QR_ID = "table-finder-qr-print"
 const DISPLAY_QR_ID = "table-finder-qr"
@@ -286,7 +286,7 @@ export function TableFinderQrCard() {
                 src={card.coupleImage}
                 alt=""
                 aria-hidden
-                className="h-auto w-[9.5rem] select-none drop-shadow-[0_14px_28px_rgba(48,74,52,0.18)] xl:w-[11rem]"
+                className="h-auto w-[9.5rem] select-none drop-shadow-[0_14px_28px_rgba(47,59,87,0.18)] xl:w-[11rem]"
               />
             </div>
           ) : null}
