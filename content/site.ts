@@ -200,16 +200,15 @@ const ATTIRE = {
     ladies: {
       label: "Ladies",
       details:
-        "Casual and polished outfits in coordinated shades of blue. Ladies may wear elegant maxi dresses, midi dresses, floral dresses, or semi-formal blouses paired with trousers while maintaining a cohesive and refined look.",
-      highlight:
-        "Casual Blue Attire • Strictly No White or Cream Dresses",
+        "Semi-formal outfits in coordinated shades of blue. Ladies may wear elegant cocktail dresses, midi or maxi dresses, or a dressy blouse paired with tailored trousers or a skirt for a cohesive and refined look. Kindly avoid white, ivory and cream.",
+      highlight: "Semi-formal outfits in coordinated shades of blue",
     },
     
     gentlemen: {
       label: "Gentlemen",
       details:
-        "Smart casual outfits in coordinated shades of blue. Polo shirts, casual dress shirts, and tailored trousers are encouraged for a comfortable yet polished look.",
-      highlight: "Smart Casual Blue Attire",
+        "Semi-formal outfits in coordinated shades of blue. A long-sleeved dress shirt or polo barong with tailored slacks is encouraged; a blazer is optional. Please avoid jeans, shorts and rubber shoes.",
+      highlight: "Semi-formal outfits in coordinated shades of blue",
     },
   },
 
@@ -221,16 +220,15 @@ const ATTIRE = {
     ladies: {
       label: "Ladies",
       details:
-        "Casual and polished outfits in coordinated shades of blue. Ladies may wear elegant maxi dresses, midi dresses, floral dresses, or semi-formal blouses paired with trousers while maintaining a cohesive and refined look.",
-      highlight:
-        "Casual Blue Attire • Strictly No White or Cream Dresses",
+        "Semi-formal outfits in coordinated shades of blue. Ladies may wear elegant cocktail dresses, midi or maxi dresses, or a dressy blouse paired with tailored trousers or a skirt for a cohesive and refined look. Kindly avoid white, ivory and cream.",
+      highlight: "Semi-formal outfits in coordinated shades of blue",
     },
     
     gentlemen: {
       label: "Gentlemen",
       details:
-        "Smart casual outfits in coordinated shades of blue. Polo shirts, casual dress shirts, and tailored trousers are encouraged for a comfortable yet polished look.",
-      highlight: "Smart Casual Blue Attire",
+        "Semi-formal outfits in coordinated shades of blue. A long-sleeved dress shirt or polo barong with tailored slacks is encouraged; a blazer is optional. Please avoid jeans, shorts and rubber shoes.",
+      highlight: "Semi-formal outfits in coordinated shades of blue",
     },
   },
 }
@@ -239,7 +237,7 @@ const ATTIRE = {
 // NEXT_PUBLIC_SITE_URL (env) overrides this when set.
 const SITE_URL = "https://jhanrel-and-danielle.weddinginvitationrsvp.com/"
 // Image shown when the link is shared (Facebook, Messenger, Viber, X, …) — 1200×630 JPG in /public
-const LINK_PREVIEW_IMAGE = "/Details/LinkPreviewnewone.png"
+const LINK_PREVIEW_IMAGE = "/Details/LinkPreview.png"
 
 // Site address with env override applied and no trailing slash — no need to edit
 export const canonicalSiteUrl = (process.env.NEXT_PUBLIC_SITE_URL ?? SITE_URL).replace(/\/$/, "")
@@ -541,8 +539,8 @@ export const siteConfig = {
 description: "Please dress according to the guidelines below.",
 
 // Shown above a card's palette
-paletteTitle: "Dress Code Palette",
-paletteSubtitle: "Casual Attire in Shades of Blue",
+paletteTitle: "Semi-Formal Dress Code Palette",
+paletteSubtitle: "Semi-Formal Attire in Shades of Blue",
 
 colorGuideTitle: "Color Guide",
 colorGuideNote: "Please refer to the exact shades of blue below for the dress code.",
@@ -1395,7 +1393,7 @@ colorGuideNote: "Please refer to the exact shades of blue below for the dress co
       "Our theme is Whimsical Spring Minimalist. Entourage: women, a flowy spring sage green dress, strictly floor length; gentlemen, a black and white suit, a white and gray suit, or sage green long sleeves with gray or brown pants — strictly no rubber shoes. Guests: casual attire, Whimsical Spring.",
     closing:
       "Thank you for helping us bring our wedding vision to life. We can't wait to celebrate with you!",
-    note: "We kindly request our guests to dress in attire following our Whimsical Spring Minimalist palette.",
+    note: "We kindly request our guests to dress in semi-formal attire following our blue palette.",
   },
   narratives: {
     ourStory: `Once upon a signature…
@@ -1556,7 +1554,7 @@ Now, as they prepare to say yes before God and the people they love most, Cather
       note: "Scan with any camera app to open the full invitation and schedule.",
     },
     hashtags: {
-      show: true,
+      show: false,
       title: "Wedding Hashtags",
       copy: "Copy",
       copied: "Copied",

@@ -269,7 +269,7 @@ export default function Home() {
               {/* <MessageVideo /> */}
               <Messages />
               <Details />
-              <WeddingTimeline />
+              <Messages />
               <Entourage />
               <GuestList />
               <BookOfGuests />
