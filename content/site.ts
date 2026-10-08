@@ -137,7 +137,7 @@ const VENUE_CARDS = {
 
 // ── RSVP & contact ──────────────────────────────────────────────────────────
 const RSVP = {
-  deadline: "November 1, 2026",
+  deadline: "October 31, 2026",
   coordinator: "{groom} / {bride}", // {groom} / {bride} → couple nicknames
   phone: "to be announced",
 }
@@ -170,25 +170,25 @@ const DRESS_CODE_PALETTE: AttireColor[] = [
 
 
 const ATTIRE = {
-  show: ["guests"] as AttireGroupId[],
+  show: ["sponsors", "guests"] as AttireGroupId[],
 
   sponsors: {
     title: "Principal Sponsors",
-    image: "/Details/entourage.png",
+    image: "/Details/sposors.png",
     palette: [ ] as AttireColor[],
 
     ladies: {
       label: "Ladies",
       details:
-        "Formal floor-length dresses in elegant shades of sage, olive, and deep botanical green.",
-      highlight: "Formal Dresses",
+        "Formal floor-length dresses in elegant shades of navy, royal blue, denim blue, dusty blue, and powder blue, with refined variations in sleeves, draping, lace, and chiffon.",
+      highlight: "Formal Blue Dresses",
     },
-
+    
     gentlemen: {
       label: "Gentlemen",
       details:
-        "Formal suit or dress shirt paired with tailored slacks in coordinated sage, olive, or deep green tones.",
-      highlight: "Suit or Dress Shirt with Slacks",
+        "Formal barong-inspired shirts, dress shirts, or coordinated formal tops paired with tailored slacks in navy, royal blue, denim blue, dusty blue, or powder blue tones.",
+      highlight: "Barong or Dress Shirt with Tailored Slacks",
     },
   },
 
@@ -200,15 +200,16 @@ const ATTIRE = {
     ladies: {
       label: "Ladies",
       details:
-        "Semi-formal outfits in coordinated shades of blue. Ladies may wear elegant cocktail dresses, midi or maxi dresses, or a dressy blouse paired with tailored trousers or a skirt for a cohesive and refined look. Kindly avoid white, ivory and cream.",
-      highlight: "Semi-formal outfits in coordinated shades of blue",
+        "Casual and polished outfits in coordinated shades of blue. Ladies may wear elegant maxi dresses, midi dresses, floral dresses, or semi-formal blouses paired with trousers while maintaining a cohesive and refined look.",
+      highlight:
+        "Casual Blue Attire • Strictly No White or Cream Dresses",
     },
     
     gentlemen: {
       label: "Gentlemen",
       details:
-        "Semi-formal outfits in coordinated shades of blue. A long-sleeved dress shirt or polo barong with tailored slacks is encouraged; a blazer is optional. Please avoid jeans, shorts and rubber shoes.",
-      highlight: "Semi-formal outfits in coordinated shades of blue",
+        "Smart casual outfits in coordinated shades of blue. Polo shirts, casual dress shirts, and tailored trousers are encouraged for a comfortable yet polished look.",
+      highlight: "Smart Casual Blue Attire",
     },
   },
 
@@ -220,15 +221,16 @@ const ATTIRE = {
     ladies: {
       label: "Ladies",
       details:
-        "Semi-formal outfits in coordinated shades of blue. Ladies may wear elegant cocktail dresses, midi or maxi dresses, or a dressy blouse paired with tailored trousers or a skirt for a cohesive and refined look. Kindly avoid white, ivory and cream.",
-      highlight: "Semi-formal outfits in coordinated shades of blue",
+        "Casual and polished outfits in coordinated shades of blue. Ladies may wear elegant maxi dresses, midi dresses, floral dresses, or semi-formal blouses paired with trousers while maintaining a cohesive and refined look.",
+      highlight:
+        "Casual Blue Attire • Strictly No White or Cream Dresses",
     },
     
     gentlemen: {
       label: "Gentlemen",
       details:
-        "Semi-formal outfits in coordinated shades of blue. A long-sleeved dress shirt or polo barong with tailored slacks is encouraged; a blazer is optional. Please avoid jeans, shorts and rubber shoes.",
-      highlight: "Semi-formal outfits in coordinated shades of blue",
+        "Smart casual outfits in coordinated shades of blue. Polo shirts, casual dress shirts, and tailored trousers are encouraged for a comfortable yet polished look.",
+      highlight: "Smart Casual Blue Attire",
     },
   },
 }
@@ -318,7 +320,7 @@ export const siteConfig = {
     message: "https://script.google.com/macros/s/AKfycbxcvbBvXKBS6LeiQLEQHz1h_S7G15mAOqRlDhoys6LrBH9gZzQH-90oOEvnIkHhEqgG/exec",  //done
     guestList: "https://script.google.com/macros/s/AKfycbxzn9PFC1fXVKu44ZmM3f3yKI36CDUe7gCCxBzBLRY_zLwmeh5QYjaNpQk6qKlQt43g/exec",  //done
     guestRequest: "https://script.google.com/macros/s/AKfycbzV5vRL8ZwpCKGCHCbd061nsaAJT6vAk778FoZOX6_NN3an-xd7iyytdL30pQhubwny/exec",   //done
-    entourage: "https://script.google.com/macros/s/AKfycbzYWoqp1I_tCul7tzTbo9AfT1_Wgp4ZfbRSKC2H9aGPfUfQr6ZwnjrtlN0S8eFNqDz_/exec",  //done
+    entourage: "https://script.google.com/macros/s/AKfycbyJxR8jOK8hh3RU4sBvDqjJPSmdmUOLRQzSjLOzRKeaeNxcQ08XN0wGTmax37ml6pqL/exec",  //done
     sponsors: "https://script.google.com/macros/s/AKfycbysfxuI1sjLmvEE7QbLddHPU7O94toJpEhJJ13RrkAO8NR1gm7t-QKvVQKjshTmajH7/exec",  
 ////google share 
     googleShare: "https://docs.google.com/spreadsheets/d/1rXgbJnVGT-kR5bXvcM1zjLyIeB3UdZ13HxHmNQqYWHc/edit?usp=sharing",
@@ -539,8 +541,8 @@ export const siteConfig = {
 description: "Please dress according to the guidelines below.",
 
 // Shown above a card's palette
-paletteTitle: "Semi-Formal Dress Code Palette",
-paletteSubtitle: "Semi-Formal Attire in Shades of Blue",
+paletteTitle: "Semi  Code Palette",
+paletteSubtitle: "Casual Attire in Shades of Blue",
 
 colorGuideTitle: "Color Guide",
 colorGuideNote: "Please refer to the exact shades of blue below for the dress code.",
@@ -1023,10 +1025,10 @@ colorGuideNote: "Please refer to the exact shades of blue below for the dress co
     eyebrow: "A Token of Love",
     title: "Gift Guide",
     subtitle: "with gratitude",
-    description: "Your presence on our wedding day is the best gift we could ask for.",
+    description: "Your presence on our wedding day is the greatest gift we could ask for. 🤍",
     paragraphs: [
-      "Should you wish to bless us with a gift, we would be grateful for a monetary gift as we begin this new chapter together.",
-      "However, if you prefer to purchase a gift, please feel free to surprise us in your own special way.",
+      "If you wish to bless us with a gift, we would be truly grateful for a monetary gift as we begin this new chapter together.",
+      "Your generosity and thoughtfulness mean so much to us. Thank you for celebrating with us and for being part of this beautiful beginning.",
     ],
     thankYou: "Thank you from the bottom of our hearts.",
     signOff: "With love,",
@@ -1393,7 +1395,7 @@ colorGuideNote: "Please refer to the exact shades of blue below for the dress co
       "Our theme is Whimsical Spring Minimalist. Entourage: women, a flowy spring sage green dress, strictly floor length; gentlemen, a black and white suit, a white and gray suit, or sage green long sleeves with gray or brown pants — strictly no rubber shoes. Guests: casual attire, Whimsical Spring.",
     closing:
       "Thank you for helping us bring our wedding vision to life. We can't wait to celebrate with you!",
-    note: "We kindly request our guests to dress in semi-formal attire following our blue palette.",
+    note: "We kindly request our guests to dress in attire following our Whimsical Spring Minimalist palette.",
   },
   narratives: {
     ourStory: `Once upon a signature…
@@ -1554,7 +1556,7 @@ Now, as they prepare to say yes before God and the people they love most, Cather
       note: "Scan with any camera app to open the full invitation and schedule.",
     },
     hashtags: {
-      show: false,
+      show: true,
       title: "Wedding Hashtags",
       copy: "Copy",
       copied: "Copied",

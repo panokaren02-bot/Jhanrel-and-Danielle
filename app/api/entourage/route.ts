@@ -3,6 +3,7 @@ import { siteConfig } from "@/content/site"
 import {
   asSheetRows,
   fetchGoogleScriptJson,
+  fetchSheetTabRows,
   invalidateSheetsCache,
   listResponseHeaders,
   SHEETS_CACHE_KEYS,
@@ -11,6 +12,7 @@ import {
 
 // Replace this with your Entourage Google Apps Script URL
 const ENTOURAGE_SCRIPT_URL = siteConfig.googleAPI.entourage
+const ENTOURAGE_TAB = "Entourage"
 
 // Entourage interface
 export interface Entourage {
@@ -20,12 +22,34 @@ export interface Entourage {
   Email: string
 }
 
+function isEntourageRow(row: unknown): boolean {
+  if (!row || typeof row !== "object") return false
+  const r = row as Record<string, unknown>
+  return ["Name", "name", "newName", "NewName"].some((key) => typeof r[key] === "string" && r[key])
+}
+
+/**
+ * Apps Script first; if it fails or returns another tab's rows (e.g. PrincipalSponsors),
+ * read the Entourage tab directly from the shared spreadsheet.
+ */
+async function fetchEntourageRows(): Promise<unknown[] | null> {
+  try {
+    const rows = asSheetRows(await fetchGoogleScriptJson(ENTOURAGE_SCRIPT_URL))
+    if (rows?.some(isEntourageRow)) return rows
+    console.warn("Entourage Apps Script did not return entourage rows; reading the Entourage tab directly")
+  } catch (error) {
+    console.warn("Entourage Apps Script failed; reading the Entourage tab directly:", error)
+  }
+
+  const rows = await fetchSheetTabRows(siteConfig.googleAPI.googleShare, ENTOURAGE_TAB)
+  return rows.length > 0 ? rows : null
+}
+
 // GET: Fetch all entourage
 export async function GET() {
   try {
     const data = await withSheetsCache(SHEETS_CACHE_KEYS.entourage, async () => {
-      const payload = await fetchGoogleScriptJson(ENTOURAGE_SCRIPT_URL)
-      const rows = asSheetRows(payload)
+      const rows = await fetchEntourageRows()
       if (!rows) {
         throw new Error("Failed to fetch entourage")
       }

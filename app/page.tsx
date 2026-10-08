@@ -267,7 +267,7 @@ export default function Home() {
               <Countdown />
               {/* <Gallery /> */}
               {/* <MessageVideo /> */}
-              <Messages />
+              {/* <Messages /> */}
               <Details />
               <Messages />
               <Entourage />

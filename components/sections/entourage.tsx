@@ -94,10 +94,10 @@ const roleTitleStyle: React.CSSProperties = {
 }
 
 const ROMAN_NUMERAL = /^(I|II|III|IV|V|VI|VII|VIII|IX|X|XI|XII|XIII|XIV|XV)$/i
-const SPECIAL_GLYPH = /^(?:I|II|III|IV|V|VI|VII|VIII|IX|X|XI|XII|XIII|XIV|XV|&|\+|[.’'`´-]|—|–)$/i
-const SPECIAL_SPLIT = /(\b(?:I|II|III|IV|V|VI|VII|VIII|IX|X|XI|XII|XIII|XIV|XV)\b|&|\+|[.’'`´-]|—|–)/g
+const SPECIAL_GLYPH = /^(?:I|II|III|IV|V|VI|VII|VIII|IX|X|XI|XII|XIII|XIV|XV|&|\+|†|[.’'`´-]|—|–)$/i
+const SPECIAL_SPLIT = /(\b(?:I|II|III|IV|V|VI|VII|VIII|IX|X|XI|XII|XIII|XIV|XV)\b|&|\+|†|[.’'`´-]|—|–)/g
 const DASH_GLYPH = /^[-—–]$/
-const PLUS_GLYPH = /^\+$/
+const PLUS_GLYPH = /^[+†]$/
 
 function toDisplayName(value: string) {
   return value
@@ -240,7 +240,8 @@ interface PrincipalSponsor {
 function entourageMemberFromApi(row: Record<string, unknown>): EntourageMember {
   const r = row as Record<string, string | undefined>
   return {
-    name: r.name ?? r.Name ?? "",
+    // "newName" covers sheets whose header row was renamed by the admin editor
+    name: r.name ?? r.Name ?? r.newName ?? r.NewName ?? "",
     roleCategory: r.roleCategory ?? r.RoleCategory ?? "",
     roleTitle: r.roleTitle ?? r.RoleTitle ?? "",
     email: r.email ?? r.Email ?? "",
@@ -391,6 +392,10 @@ function sortBrideParents(members: EntourageMember[]): EntourageMember[] {
   })
 }
 
+function looksLikeSponsorRows(data: Record<string, unknown>[]): boolean {
+  return data.some((row) => "MalePrincipalSponsor" in row || "FemalePrincipalSponsor" in row)
+}
+
 function toEntourageMembers(data: Record<string, unknown>[]): EntourageMember[] {
   return data
     .map((row) => entourageMemberFromApi(row))
@@ -406,6 +411,11 @@ function toPrincipalSponsors(data: Record<string, unknown>[]): PrincipalSponsor[
 
 async function loadEntourageFromApi(signal?: AbortSignal, reload = false): Promise<EntourageMember[]> {
   const data = await fetchInvitationList<Record<string, unknown>>("/api/entourage", { signal, reload })
+  if (looksLikeSponsorRows(data)) {
+    console.warn(
+      "/api/entourage returned principal sponsor rows — the entourage Apps Script (googleAPI.entourage) is reading the PrincipalSponsors tab instead of Entourage.",
+    )
+  }
   return toEntourageMembers(data)
 }
 
@@ -446,7 +456,7 @@ export function Entourage() {
 
   const loadParty = async (signal?: AbortSignal, { reload = false } = {}) => {
     const cached = readCachedParty()
-    const hasCached = cached.members.length > 0
+    const hasCached = cached.members.length > 0 || cached.sponsors.length > 0
     if (hasCached) {
       // Show the last known list right away; refresh quietly in the background
       setEntourage(cached.members)
@@ -467,12 +477,22 @@ export function Entourage() {
           maxAttempts: 4,
           maxDelayMs: 3000,
           onRetry: () => setIsRetrying(true),
+        }).catch((err: unknown) => {
+          // Entourage failing shouldn't hide sponsors that did load
+          if (isAbortError(err)) throw err
+          console.error("Failed to load entourage:", err)
+          return [] as EntourageMember[]
         }),
         loadSponsorsFromApi(signal, reload),
       ])
       if (signal?.aborted) return
-      setEntourage(members)
-      setSponsors(sponsorList)
+      if (members.length === 0 && sponsorList.length === 0) {
+        if (!hasCached) setError("Unable to load entourage")
+        return
+      }
+      // Keep the cached copy of whichever list came back empty this time
+      if (members.length > 0 || !hasCached) setEntourage(members)
+      if (sponsorList.length > 0 || !hasCached) setSponsors(sponsorList)
       setError(null)
     } catch (err: unknown) {
       if (isAbortError(err)) return
@@ -951,42 +971,37 @@ export function Entourage() {
                           <div key="SponsorsAfterParents">
                             <div className="flex justify-center py-1.5 sm:py-2 md:py-2.5 mb-2 sm:mb-2.5 md:mb-3" />
                             <TwoColumnLayout singleTitle="Principal Sponsors" centerContent={true}>
-                              {sponsors.map((sponsor, idx) => (
-                                <React.Fragment key={`sponsor-row-${idx}`}>
-                                  <div className="px-0.5 sm:px-1 md:px-1.5 min-w-0 overflow-hidden">
-                                    {sponsor.malePrincipalSponsor ? (
-                                      <NameItem
-                                        member={{
-                                          name: sponsor.malePrincipalSponsor,
-                                          roleCategory: "",
-                                          roleTitle: "",
-                                          email: "",
-                                        }}
-                                        align="right"
-                                        showRole={false}
-                                      />
-                                    ) : (
-                                      <div className="py-0.5 sm:py-1 md:py-1.5" />
-                                    )}
-                                  </div>
-                                  <div className="px-0.5 sm:px-1 md:px-1.5 min-w-0 overflow-hidden">
-                                    {sponsor.femalePrincipalSponsor ? (
-                                      <NameItem
-                                        member={{
-                                          name: sponsor.femalePrincipalSponsor,
-                                          roleCategory: "",
-                                          roleTitle: "",
-                                          email: "",
-                                        }}
-                                        align="left"
-                                        showRole={false}
-                                      />
-                                    ) : (
-                                      <div className="py-0.5 sm:py-1 md:py-1.5" />
-                                    )}
-                                  </div>
-                                </React.Fragment>
-                              ))}
+                              {sponsors.map((sponsor, idx) => {
+                                const male = sponsor.malePrincipalSponsor
+                                const female = sponsor.femalePrincipalSponsor
+                                const sponsorMember = (name: string): EntourageMember => ({
+                                  name,
+                                  roleCategory: "",
+                                  roleTitle: "",
+                                  email: "",
+                                })
+                                // A sponsor without a partner sits centered instead of leaving a gap
+                                if (!male || !female) {
+                                  return (
+                                    <div
+                                      key={`sponsor-row-${idx}`}
+                                      className="col-span-2 flex justify-center min-w-0 overflow-hidden px-0.5 sm:px-1"
+                                    >
+                                      <NameItem member={sponsorMember(male || female)} align="center" showRole={false} />
+                                    </div>
+                                  )
+                                }
+                                return (
+                                  <React.Fragment key={`sponsor-row-${idx}`}>
+                                    <div className="px-0.5 sm:px-1 md:px-1.5 min-w-0 overflow-hidden">
+                                      <NameItem member={sponsorMember(male)} align="right" showRole={false} />
+                                    </div>
+                                    <div className="px-0.5 sm:px-1 md:px-1.5 min-w-0 overflow-hidden">
+                                      <NameItem member={sponsorMember(female)} align="left" showRole={false} />
+                                    </div>
+                                  </React.Fragment>
+                                )
+                              })}
                             </TwoColumnLayout>
                           </div>
                         )}
@@ -1121,8 +1136,9 @@ export function Entourage() {
                   )
                   if (category !== firstHonorCategory) return null
 
-                  const hasSideHonors = bestMan.length > 0 || maidOfHonor.length > 0
-                  const hasMatron = matronOfHonor.length > 0
+                  // Matron of Honor pairs with the Best Man; a Maid of Honor gets the centered spot below
+                  const hasSideHonors = bestMan.length > 0 || matronOfHonor.length > 0
+                  const hasMaid = maidOfHonor.length > 0
 
                   return (
                     <div key="HonorAttendants">
@@ -1145,20 +1161,20 @@ export function Entourage() {
                         </TwoColumnLayout>
                       )}
 
-                      {manOfHonor.length > 0 && (hasSideHonors || hasMatron) && (
+                      {manOfHonor.length > 0 && (hasSideHonors || hasMaid) && (
                         <div className="flex justify-center py-1.5 sm:py-2 md:py-2.5 mb-2 sm:mb-2.5 md:mb-3">
                           <div className="w-full max-w-md h-px" style={dividerLineStyle} />
                         </div>
                       )}
 
                       {hasSideHonors && (
-                        <TwoColumnLayout leftTitle="Best Man" rightTitle="Maid of Honor">
+                        <TwoColumnLayout leftTitle="Best Man" rightTitle="Matron of Honor">
                           {(() => {
-                            const maxLen = Math.max(bestMan.length, maidOfHonor.length)
+                            const maxLen = Math.max(bestMan.length, matronOfHonor.length)
                             const rows = []
                             for (let i = 0; i < maxLen; i++) {
                               const left = bestMan[i]
-                              const right = maidOfHonor[i]
+                              const right = matronOfHonor[i]
                               rows.push(
                                 <React.Fragment key={`honor-row-${i}`}>
                                   <div
@@ -1189,17 +1205,17 @@ export function Entourage() {
                         </TwoColumnLayout>
                       )}
 
-                      {hasSideHonors && hasMatron && (
+                      {hasSideHonors && hasMaid && (
                         <div className="flex justify-center py-1.5 sm:py-2 md:py-2.5 mb-2 sm:mb-2.5 md:mb-3">
                           <div className="w-full max-w-md h-px" style={dividerLineStyle} />
                         </div>
                       )}
 
-                      {hasMatron && (
-                        <TwoColumnLayout singleTitle="Matron of Honor" centerContent={true}>
-                          {matronOfHonor.map((member, idx) => (
+                      {hasMaid && (
+                        <TwoColumnLayout singleTitle="Maid of Honor" centerContent={true}>
+                          {maidOfHonor.map((member, idx) => (
                             <div
-                              key={`matron-of-honor-${idx}-${member.name}`}
+                              key={`maid-of-honor-${idx}-${member.name}`}
                               className="col-span-2 flex justify-center min-w-0 overflow-hidden px-0.5 sm:px-1"
                             >
                               <NameItem member={member} align="center" showRole={false} />

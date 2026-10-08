@@ -170,6 +170,83 @@ export async function postGoogleScriptJson(url: string, payload: unknown): Promi
   return data ?? { success: true }
 }
 
+function parseCsv(text: string): string[][] {
+  const rows: string[][] = []
+  let row: string[] = []
+  let field = ""
+  let quoted = false
+
+  for (let i = 0; i < text.length; i += 1) {
+    const ch = text[i]
+    if (quoted) {
+      if (ch === '"' && text[i + 1] === '"') {
+        field += '"'
+        i += 1
+      } else if (ch === '"') {
+        quoted = false
+      } else {
+        field += ch
+      }
+    } else if (ch === '"') {
+      quoted = true
+    } else if (ch === ",") {
+      row.push(field)
+      field = ""
+    } else if (ch === "\n" || ch === "\r") {
+      if (ch === "\r" && text[i + 1] === "\n") i += 1
+      row.push(field)
+      rows.push(row)
+      row = []
+      field = ""
+    } else {
+      field += ch
+    }
+  }
+  if (field || row.length) {
+    row.push(field)
+    rows.push(row)
+  }
+  return rows
+}
+
+function spreadsheetIdFromUrl(url: string): string | null {
+  return url.match(/\/spreadsheets\/d\/([a-zA-Z0-9-_]+)/)?.[1] ?? null
+}
+
+/**
+ * Read one tab of a link-shared spreadsheet straight from Google Sheets (no Apps Script).
+ * Rows come back keyed by the header row; blank headers and blank rows are dropped.
+ */
+export async function fetchSheetTabRows(
+  spreadsheetUrl: string,
+  tab: string,
+): Promise<Record<string, string>[]> {
+  const id = spreadsheetIdFromUrl(spreadsheetUrl)
+  if (!id) throw new Error("Invalid spreadsheet URL")
+
+  const url = `https://docs.google.com/spreadsheets/d/${id}/gviz/tq?tqx=out:csv&sheet=${encodeURIComponent(tab)}`
+  const response = await fetch(url, {
+    cache: "no-store",
+    redirect: "follow",
+    signal: AbortSignal.timeout(20_000),
+  })
+  if (!response.ok) {
+    throw new Error(`Google Sheets request failed (${response.status})`)
+  }
+
+  const [header = [], ...body] = parseCsv(await response.text())
+  const keys = header.map((key) => key.trim())
+  return body
+    .map((cells) => {
+      const row: Record<string, string> = {}
+      keys.forEach((key, index) => {
+        if (key) row[key] = (cells[index] ?? "").trim()
+      })
+      return row
+    })
+    .filter((row) => Object.values(row).some(Boolean))
+}
+
 export const listResponseHeaders = {
   "Cache-Control": "public, max-age=20, stale-while-revalidate=60",
 } as const
