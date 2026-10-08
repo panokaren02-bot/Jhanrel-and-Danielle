@@ -41,7 +41,15 @@ async function fetchEntourageRows(): Promise<unknown[] | null> {
     console.warn("Entourage Apps Script failed; reading the Entourage tab directly:", error)
   }
 
-  const rows = await fetchSheetTabRows(siteConfig.googleAPI.googleShare, ENTOURAGE_TAB)
+  // Sheet headers vary (e.g. "newName", camelCase) — return the same shape the Apps Script does
+  const rows: Entourage[] = (await fetchSheetTabRows(siteConfig.googleAPI.googleShare, ENTOURAGE_TAB))
+    .map((r) => ({
+      Name: r.Name ?? r.name ?? r.newName ?? r.NewName ?? "",
+      RoleCategory: r.RoleCategory ?? r.roleCategory ?? "",
+      RoleTitle: r.RoleTitle ?? r.roleTitle ?? "",
+      Email: r.Email ?? r.email ?? "",
+    }))
+    .filter((r) => r.Name)
   return rows.length > 0 ? rows : null
 }
 
