@@ -1556,7 +1556,7 @@ Now, as they prepare to say yes before God and the people they love most, Cather
       note: "Scan with any camera app to open the full invitation and schedule.",
     },
     hashtags: {
-      show: true,
+      show: false,
       title: "Wedding Hashtags",
       copy: "Copy",
       copied: "Copied",
