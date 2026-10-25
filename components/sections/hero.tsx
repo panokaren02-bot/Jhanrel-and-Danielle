@@ -218,6 +218,7 @@ export function Hero() {
   const cornerDecos =
     loading.cornerDecos ?? defaultSiteConfig.loadingScreen.cornerDecos
   const backgroundPhotos = loading.backgroundPhotos ?? []
+  const backgroundPhotosDesktop = loading.backgroundPhotosDesktop ?? []
   const reduceMotion = useReducedMotion()
   const [visible, setVisible] = useState(false)
 
@@ -288,6 +289,7 @@ export function Hero() {
             <InvitePhotoBackdrop
               className="invite-photo-backdrop--section"
               photos={backgroundPhotos}
+              desktopPhotos={backgroundPhotosDesktop}
             />
           </div>
           <div className="home-hero-photo-scrim pointer-events-none absolute inset-0 z-[1]" aria-hidden="true" />

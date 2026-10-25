@@ -5,7 +5,7 @@ import Image from 'next/image';
 import { useReducedMotion } from 'motion/react';
 import { useSiteConfig } from '@/hooks/use-site-config';
 import { siteConfig as defaultSiteConfig } from '@/content/site';
-import { PhotoMarquee } from '@/components/loader/invite-photo-backdrop';
+import { PhotoMarquee, useResponsivePhotos } from '@/components/loader/invite-photo-backdrop';
 import { PlainAtmosphere } from '@/components/loader/PlainAtmosphere';
 import './loading-screen.css';
 
@@ -48,6 +48,11 @@ export const LoadingScreen: React.FC<LoadingScreenProps> = ({ onComplete, onFade
     () => (content.backgroundPhotos ?? []).map((src) => encodeURI(src)),
     [content.backgroundPhotos],
   );
+  const backgroundPhotosDesktop = useMemo(
+    () => (content.backgroundPhotosDesktop ?? []).map((src) => encodeURI(src)),
+    [content.backgroundPhotosDesktop],
+  );
+  const marqueePhotos = useResponsivePhotos(backgroundPhotos, backgroundPhotosDesktop);
   const showBackdrop = !isPlain && backgroundPhotos.length > 0;
   const plainTheme = content.plainTheme ?? defaultSiteConfig.loadingScreen.plainTheme;
   const cornerDecos = content.cornerDecos ?? defaultSiteConfig.loadingScreen.cornerDecos;
@@ -175,7 +180,7 @@ export const LoadingScreen: React.FC<LoadingScreenProps> = ({ onComplete, onFade
       {showBackdrop && (
         <>
           <div className="loading-screen__backdrop" aria-hidden="true">
-            <PhotoMarquee photos={backgroundPhotos} copies={photoCopies} variant="loader" shuffle={false} />
+            <PhotoMarquee photos={marqueePhotos} copies={photoCopies} variant="loader" shuffle={false} />
             <div className="loading-screen__backdrop-veil" />
           </div>
           <div className="loading-screen__readability-scrim" aria-hidden="true" />

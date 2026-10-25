@@ -172,7 +172,10 @@ export default function Home() {
             className="invite-photo-backdrop-wrap invite-photo-backdrop-wrap--loading"
             aria-hidden="true"
           >
-            <InvitePhotoBackdrop photos={siteConfig.loadingScreen?.backgroundPhotos} />
+            <InvitePhotoBackdrop
+              photos={siteConfig.loadingScreen?.backgroundPhotos}
+              desktopPhotos={siteConfig.loadingScreen?.backgroundPhotosDesktop}
+            />
           </div>
         )}
 
@@ -263,9 +266,9 @@ export default function Home() {
               >
                <Welcome />
               {/* <CoupleVideo />  */}
-              {/* <LoveStory /> */}
+              <LoveStory />
               <Countdown />
-              {/* <Gallery /> */}
+              <Gallery />
               {/* <MessageVideo /> */}
               {/* <Messages /> */}
               <Details />

@@ -247,7 +247,7 @@ export const canonicalSiteUrl = (process.env.NEXT_PUBLIC_SITE_URL ?? SITE_URL).r
 // ── Look & feel ─────────────────────────────────────────────────────────────
 // "plain"  = no photo backgrounds anywhere (botanical cards, hides photo-only blocks)
 // "photos" = photo backgrounds on the loader, envelope and closing section
-const DISPLAY_MODE = "plain" as "photos" | "plain"
+const DISPLAY_MODE = "photos" as "photos" | "plain"
 
 // ── Shared images ───────────────────────────────────────────────────────────
 const BRAND = {
@@ -258,18 +258,16 @@ const BRAND = {
 }
 
 // Couple photos reused across the site (gallery, loader, reminders, snap & share, closing)
-const COUPLE_PHOTOS = [
-  "/mobile-background/couple (1).webp",
-  "/mobile-background/couple (2).webp",
-  "/mobile-background/couple (3).webp",
-  "/mobile-background/couple (4).webp",
-  "/mobile-background/couple (5).webp",
-  "/mobile-background/couple (6).webp",
-  "/mobile-background/couple (7).webp",
-  "/mobile-background/couple (8).webp",
-  "/mobile-background/couple (9).webp",
-  "/mobile-background/couple (10).webp",
-]
+const COUPLE_PHOTOS = Array.from(
+  { length: 7 },
+  (_, i) => `/mobile-background/couples (${i + 1}).webp`,
+)
+
+// Sliding marquee backgrounds (loader, envelope, home hero) — portrait for phones, landscape for desktop
+const BACKGROUND_PHOTOS = {
+  mobile: COUPLE_PHOTOS,
+  desktop: Array.from({ length: 7 }, (_, i) => `/desktop-background/couples (${i + 1}).webp`),
+}
 
 // ── Decorations ─────────────────────────────────────────────────────────────
 // Change a path here to swap it on every section at once.
@@ -348,7 +346,9 @@ export const siteConfig = {
       accent: "var(--color-welcome-gold)",
     },
     // Sliding background photos (display: "photos"); files live in /public
-    backgroundPhotos: COUPLE_PHOTOS,
+    backgroundPhotos: BACKGROUND_PHOTOS.mobile,
+    // Landscape set used on screens 768px and wider
+    backgroundPhotosDesktop: BACKGROUND_PHOTOS.desktop,
     headline: "Save the Date",
     // {days} is replaced with the number of days left before wedding.date
     countdownText: "{days} more days to go",
@@ -357,11 +357,7 @@ export const siteConfig = {
     countdownPastText: "Thank you for celebrating with us",
     coupleNameImage: BRAND.coupleNameImage,
     // Shown in the three date cards (Month / Day / Year), left to right (display: "photos")
-    photos: [
-      "/frontboxes/couple (1).webp",
-      "/frontboxes/couple (2).webp",
-      "/frontboxes/couple (3).webp",
-    ],
+    photos: COUPLE_PHOTOS.slice(0, 3),
     dateLabels: ["Month", "Day", "Year"],
     // Plain mode invitation card — classic invitation wording around the couple's names ("" to hide a line)
     plainInvite: {
@@ -404,16 +400,18 @@ export const siteConfig = {
         layout: "image-left" as const,
         image: "/mobile-background/couples (1).webp",
         paragraphs: [
-          "In 2018, what started as two strangers meeting turned into a beautiful journey neither of them expected.",
+          "In 2018, two strangers crossed paths, never imagining that a simple hello would become the beginning of their forever.",
+          "What started as an ordinary meeting quietly became the first page of a story God had been writing all along.",
         ],
       },
       {
-        title: "Growing Friendship",
+        title: "Laughter, Teasing, and Friendship",
         theme: "dark" as const,
         layout: "image-right" as const,
         image: "/mobile-background/couples (2).webp",
         paragraphs: [
-          "From playful conversations and {groom}'s endless teasing of {bride}, a friendship slowly grew into something deeper.",
+          "Through playful conversations and {groom}'s endless teasing of {bride}, a true friendship began to bloom.",
+          "Behind every joke and every little argument was a growing comfort — the kind that turns a friend into a home.",
         ],
       },
       {
@@ -422,7 +420,8 @@ export const siteConfig = {
         layout: "image-left" as const,
         image: "/mobile-background/couples (3).webp",
         paragraphs: [
-          "Behind the jokes and little arguments was a love that continued to grow stronger every day.",
+          "Day by day, friendship deepened into love. They learned each other's hearts, celebrated the good days, and held on through the hard ones.",
+          "It was not always perfect, but it was always real — and it kept growing stronger.",
         ],
       },
       {
@@ -431,67 +430,39 @@ export const siteConfig = {
         layout: "image-right" as const,
         image: "/mobile-background/couples (4).webp",
         paragraphs: [
-          "Then in 2024, came the season of distance. As they began their long-distance relationship, they learned that love is not measured by the miles between them, but by the choice to keep choosing each other.",
-        ],
-      },
-      {
-        title: "Calls, Prayers, and Patience",
-        theme: "light" as const,
-        layout: "image-left" as const,
-        image: "/mobile-background/couples (5).webp",
-        paragraphs: [
-          "Through countless calls, prayers, patience, and waiting, they proved that love can overcome any distance.",
+          "In 2024 came the season of distance. Miles stood between them, but their hearts never drifted apart.",
+          "Through countless calls, whispered prayers, patience, and waiting, they learned that love is not measured by the distance between two people — but by the choice to keep choosing each other.",
         ],
       },
       {
         title: "The Question in Taiwan",
-        theme: "dark" as const,
-        layout: "image-right" as const,
-        image: "/mobile-background/couples (6).webp",
+        theme: "light" as const,
+        layout: "image-left" as const,
+        image: "/mobile-background/couples (5).webp",
         paragraphs: [
           "In 2025, in Taiwan, {groom} asked {bride} the most important question of their lives.",
-        ],
-      },
-      {
-        title: "She Said Yes",
-        theme: "light" as const,
-        layout: "image-left" as const,
-        image: "/mobile-background/couples (7).webp",
-        paragraphs: ["And with a heart full of love, {bride} said yes."],
-      },
-      {
-        title: "Surrounded by Love",
-        theme: "dark" as const,
-        layout: "image-right" as const,
-        image: "/mobile-background/couples (8).webp",
-        paragraphs: [
-          "Now in 2026, surrounded by the people who mean the most to them, they begin their forever.",
-        ],
-      },
-      {
-        title: "Forever Partners",
-        theme: "light" as const,
-        layout: "image-left" as const,
-        image: "/mobile-background/couples (9).webp",
-        paragraphs: ["From strangers, to best friends, to forever partners."],
-      },
-      {
-        title: "Their Greatest Adventure",
-        theme: "dark" as const,
-        layout: "image-right" as const,
-        image: "/mobile-background/couples (10).webp",
-        paragraphs: [
-          "Their greatest adventure begins — a lifetime of love, chosen again and again, no matter the distance.",
+          "And with a heart full of love and eyes full of tears, {bride} said yes.",
         ],
       },
       {
         title: "Ready to Say I Do",
+        theme: "dark" as const,
+        layout: "image-right" as const,
+        image: "/mobile-background/couples (6).webp",
+        paragraphs: [
+          "From strangers, to best friends, to forever partners — {groom} and {bride} now stand ready to begin their greatest adventure.",
+          "In 2026, before God and the people who mean the most to them, they will promise a lifetime of love, chosen again and again, no matter the distance.",
+        ],
+      },
+      {
+        title: "With Grateful Hearts",
         theme: "light" as const,
         layout: "image-left" as const,
-        image: "/mobile-background/couples (11).webp",
+        image: "/mobile-background/couples (7).webp",
         paragraphs: [
-          "From two strangers meeting in 2018, through years of teasing, laughter, distance, and prayer, to a yes in Taiwan — {groom} and {bride} are ready to say \"I do.\"",
-          "Join us as we begin forever.",
+          "To our families — thank you for your endless love, guidance, and prayers. You taught us what love looks like, and we carry your example into our new life together.",
+          "To our friends, godparents, and everyone who cheered us on through every season, near or far — thank you for laughing with us, praying with us, and believing in us.",
+          "Our story would not be complete without you. We warmly welcome you to celebrate this new chapter with us — come as you are, and share in the joy of the day we say \"I do.\"",
         ],
       },
     ],
@@ -508,8 +479,9 @@ export const siteConfig = {
     buttonText: "View Full Gallery",
     buttonHref: "/gallery",
     decos: { ...SECTION_DECOS },
-    // Uses COUPLE_PHOTOS; replace with your own list if the gallery should differ
-    images: COUPLE_PHOTOS.map((image) => ({ image, text: "" })),
+    // Section thumbnails come from public/mobile-background; the /gallery page lists
+    // every file in public/desktop-background + public/mobile-background automatically
+    images: BACKGROUND_PHOTOS.mobile.map((image) => ({ image, text: "" })),
   },
   // Event details section (components/sections/details.tsx)
   // Venue names, addresses, dates, times, maps and venue photos come from ceremony / reception below.

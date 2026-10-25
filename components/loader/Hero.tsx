@@ -35,12 +35,9 @@ function startOfDay(date: Date) {
   return new Date(date.getFullYear(), date.getMonth(), date.getDate()).getTime();
 }
 
-const photoInteractEase: Transition = { duration: 0.38, ease: [0.22, 1, 0.36, 1] };
 const focusLiftEase: Transition = { duration: 1.15, ease: [0.22, 1, 0.36, 1] };
 const revealEntryEase: Transition = { duration: 0.9, ease: [0.22, 1, 0.36, 1] };
 const buttonEntryEase: Transition = { duration: 0.95, ease: [0.16, 1, 0.3, 1] };
-
-type PhotoSide = 'left' | 'center' | 'right' | 'right-inner';
 
 type EnvelopePhase =
   | 'idle'
@@ -48,11 +45,10 @@ type EnvelopePhase =
   | 'seal-break'
   | 'flap-open'
   | 'rising'
-  | 'photos'
   | 'revealed'
   | 'cta';
 
-function getFocusLiftPhase(phase: EnvelopePhase): 'idle' | 'opening' | 'photos' | 'revealed' | 'cta' {
+function getFocusLiftPhase(phase: EnvelopePhase): 'idle' | 'opening' | 'revealed' | 'cta' {
   if (phase === 'idle') return 'idle';
   if (
     phase === 'seal-press' ||
@@ -62,12 +58,10 @@ function getFocusLiftPhase(phase: EnvelopePhase): 'idle' | 'opening' | 'photos' 
   ) {
     return 'opening';
   }
-  if (phase === 'photos') return 'photos';
   if (phase === 'revealed') return 'revealed';
   return 'cta';
 }
 
-const photoEmergenceEase: Transition = { duration: 2.35, ease: [0.22, 1, 0.18, 1] };
 const letterEmergenceEase: Transition = { duration: 3.05, ease: [0.5, 0.02, 0.14, 1] };
 const flapEase: Transition = { duration: 1.1, ease: [0.65, 0, 0.35, 1] };
 const inviteExitEase: Transition = { duration: 1.65, ease: [0.22, 1, 0.36, 1], delay: 0.75 };
@@ -93,7 +87,6 @@ export const Hero: React.FC<HeroProps> = ({
   const [mounted, setMounted] = useState(false);
   const [phase, setPhase] = useState<EnvelopePhase>('idle');
   const [liveMessage, setLiveMessage] = useState('');
-  const [liftedPhoto, setLiftedPhoto] = useState<PhotoSide | null>(null);
   const [isExiting, setIsExiting] = useState(false);
   const [isMobileViewport, setIsMobileViewport] = useState(false);
 
@@ -128,25 +121,11 @@ export const Hero: React.FC<HeroProps> = ({
     () => (content.backgroundPhotos ?? []).map((src) => encodeURI(src)),
     [content.backgroundPhotos],
   );
+  const backgroundPhotosDesktop = useMemo(
+    () => (content.backgroundPhotosDesktop ?? []).map((src) => encodeURI(src)),
+    [content.backgroundPhotosDesktop],
+  );
   const showPhotoBackdrop = !isPlain && backgroundPhotos.length > 0;
-
-  const envelopePolaroids = useMemo(() => {
-    const photos = (content.photos ?? []).map((src) => encodeURI(src));
-    const pick = (index: number) => photos[index % photos.length];
-    if (!photos.length) return { mobile: [] as const, desktop: [] as const };
-    return {
-      mobile: [
-        { src: pick(0), side: 'left' as const },
-        { src: pick(1), side: 'right' as const },
-      ] as const,
-      desktop: [
-        { src: pick(0), side: 'left' as const },
-        { src: pick(1), side: 'center' as const },
-        { src: pick(2), side: 'right' as const },
-        { src: pick(3), side: 'right-inner' as const },
-      ] as const,
-    };
-  }, [content.photos]);
 
   const countdownText = useMemo(() => {
     const weddingDate = new Date(siteConfig.wedding.date);
@@ -162,13 +141,11 @@ export const Hero: React.FC<HeroProps> = ({
   const flapIsOpen =
     phase === 'flap-open' ||
     phase === 'rising' ||
-    phase === 'photos' ||
     phase === 'revealed' ||
     phase === 'cta';
 
   const contentsVisible =
     phase === 'rising' ||
-    phase === 'photos' ||
     phase === 'revealed' ||
     phase === 'cta';
 
@@ -176,7 +153,6 @@ export const Hero: React.FC<HeroProps> = ({
     phase === 'seal-break' ||
     phase === 'flap-open' ||
     phase === 'rising' ||
-    phase === 'photos' ||
     phase === 'revealed' ||
     phase === 'cta';
 
@@ -197,7 +173,6 @@ export const Hero: React.FC<HeroProps> = ({
       openedRef.current = false;
       setPhase('idle');
       setLiveMessage('');
-      setLiftedPhoto(null);
       setIsExiting(false);
     }
   }, [visible]);
@@ -219,22 +194,6 @@ export const Hero: React.FC<HeroProps> = ({
       enterBtnRef.current?.focus({ preventScroll: true });
     }
   }, [phase]);
-
-  useEffect(() => {
-    if (
-      phase === 'idle' ||
-      phase === 'seal-press' ||
-      phase === 'seal-break' ||
-      phase === 'flap-open' ||
-      phase === 'rising'
-    ) {
-      setLiftedPhoto(null);
-    }
-  }, [phase]);
-
-  const toggleLiftedPhoto = useCallback((side: PhotoSide) => {
-    setLiftedPhoto((current) => (current === side ? null : side));
-  }, []);
 
   const handleEnterInvitation = useCallback(async () => {
     if (isExiting || phase !== 'cta') return;
@@ -276,12 +235,6 @@ export const Hero: React.FC<HeroProps> = ({
     setLiveMessage('Invitation rising.');
     setPhase('rising');
     await wait(isPlain ? 2400 : 3200);
-
-    if (!isPlain) {
-      setLiveMessage('Photos revealing.');
-      setPhase('photos');
-      await wait(3600);
-    }
 
     setPhase('revealed');
     await wait(650);
@@ -342,60 +295,6 @@ export const Hero: React.FC<HeroProps> = ({
     [isMobileViewport],
   );
 
-  const photoLeftVariants: Variants = {
-    hidden: { y: '58%', x: '12%', rotate: -4, scale: 0.72, opacity: 0, zIndex: 12 },
-    emerge: { y: '0%', x: '0%', rotate: -7, scale: 1, opacity: 1, zIndex: 16 },
-    hover: { y: '-6%', x: '0%', rotate: -8, scale: 1.05, opacity: 1, zIndex: 26 },
-    press: { y: '-3%', x: '0%', rotate: -7.5, scale: 1.02, opacity: 1, zIndex: 24 },
-    lifted: { y: '-12%', x: '0%', rotate: -8, scale: 1.08, opacity: 1, zIndex: 30 },
-    exit: { y: '-18%', x: '-108%', rotate: -24, scale: 0.68, opacity: 0, zIndex: 10 },
-  };
-
-  const photoCenterVariants: Variants = {
-    hidden: { y: '62%', x: '0%', rotate: 0, scale: 0.7, opacity: 0, zIndex: 11 },
-    emerge: { y: '0%', x: '0%', rotate: 2, scale: 1, opacity: 1, zIndex: 15 },
-    hover: { y: '-6%', x: '0%', rotate: 2.5, scale: 1.05, opacity: 1, zIndex: 27 },
-    press: { y: '-3%', x: '0%', rotate: 2.2, scale: 1.02, opacity: 1, zIndex: 25 },
-    lifted: { y: '-12%', x: '0%', rotate: 3, scale: 1.08, opacity: 1, zIndex: 31 },
-    exit: { y: '-108%', x: '0%', rotate: 10, scale: 0.72, opacity: 0, zIndex: 10 },
-  };
-
-  const photoRightVariants: Variants = {
-    hidden: { y: '58%', x: '-12%', rotate: 4, scale: 0.72, opacity: 0, zIndex: 12 },
-    emerge: { y: '0%', x: '0%', rotate: 7, scale: 1, opacity: 1, zIndex: 16 },
-    hover: { y: '-6%', x: '0%', rotate: 8, scale: 1.05, opacity: 1, zIndex: 26 },
-    press: { y: '-3%', x: '0%', rotate: 7.5, scale: 1.02, opacity: 1, zIndex: 24 },
-    lifted: { y: '-12%', x: '0%', rotate: 8, scale: 1.08, opacity: 1, zIndex: 30 },
-    exit: { y: '-18%', x: '108%', rotate: 24, scale: 0.68, opacity: 0, zIndex: 10 },
-  };
-
-  const photoRightInnerVariants: Variants = {
-    hidden: { y: '62%', x: '-10%', rotate: 1, scale: 0.7, opacity: 0, zIndex: 11 },
-    emerge: { y: '0%', x: '0%', rotate: -2, scale: 1, opacity: 1, zIndex: 15 },
-    hover: { y: '-6%', x: '0%', rotate: -2.5, scale: 1.05, opacity: 1, zIndex: 27 },
-    press: { y: '-3%', x: '0%', rotate: -2.2, scale: 1.02, opacity: 1, zIndex: 25 },
-    lifted: { y: '-12%', x: '0%', rotate: -3, scale: 1.08, opacity: 1, zIndex: 31 },
-    exit: { y: '-18%', x: '108%', rotate: 16, scale: 0.72, opacity: 0, zIndex: 10 },
-  };
-
-  const mobileEnvelopePhotoLeftVariants: Variants = {
-    hidden: { y: '58%', x: '6%', rotate: -1, scale: 0.72, opacity: 0, zIndex: 12 },
-    emerge: { y: '0%', x: '-8%', rotate: -4, scale: 1, opacity: 1, zIndex: 16 },
-    hover: { y: '-6%', x: '-8%', rotate: -4.5, scale: 1.05, opacity: 1, zIndex: 26 },
-    press: { y: '-3%', x: '-8%', rotate: -4.2, scale: 1.02, opacity: 1, zIndex: 24 },
-    lifted: { y: '-12%', x: '-8%', rotate: -4.5, scale: 1.08, opacity: 1, zIndex: 30 },
-    exit: { y: '-18%', x: '-108%', rotate: -24, scale: 0.68, opacity: 0, zIndex: 10 },
-  };
-
-  const mobileEnvelopePhotoRightVariants: Variants = {
-    hidden: { y: '58%', x: '-6%', rotate: 1, scale: 0.72, opacity: 0, zIndex: 12 },
-    emerge: { y: '0%', x: '8%', rotate: 4, scale: 1, opacity: 1, zIndex: 16 },
-    hover: { y: '-6%', x: '8%', rotate: 4.5, scale: 1.05, opacity: 1, zIndex: 26 },
-    press: { y: '-3%', x: '8%', rotate: 4.2, scale: 1.02, opacity: 1, zIndex: 24 },
-    lifted: { y: '-12%', x: '8%', rotate: 4.5, scale: 1.08, opacity: 1, zIndex: 30 },
-    exit: { y: '-18%', x: '108%', rotate: 24, scale: 0.68, opacity: 0, zIndex: 10 },
-  };
-
   const revealCopyContainerVariants: Variants = {
     hidden: {},
     visible: {
@@ -443,7 +342,6 @@ export const Hero: React.FC<HeroProps> = ({
   const focusLiftVariants: Variants = {
     idle: { y: 0, scale: 1, opacity: 1 },
     opening: { y: 0, scale: 1, opacity: 1 },
-    photos: { y: 0, scale: 1, opacity: 1 },
     revealed: { y: 0, scale: 1, opacity: 1 },
     cta: { y: 0, scale: 1, opacity: 1 },
     exit: {
@@ -465,17 +363,6 @@ export const Hero: React.FC<HeroProps> = ({
       : phase === 'rising'
         ? 'rising'
         : 'out';
-
-  const photoState =
-    phase === 'idle' ||
-    phase === 'seal-press' ||
-    phase === 'seal-break' ||
-    phase === 'flap-open' ||
-    phase === 'rising'
-      ? 'hidden'
-      : 'emerge';
-
-  const photosInteractive = photoState === 'emerge';
 
   const sealState =
     phase === 'idle' ? 'idle' : phase === 'seal-press' ? 'press' : 'break';
@@ -511,7 +398,11 @@ export const Hero: React.FC<HeroProps> = ({
     >
       {showPhotoBackdrop && (
         <div className="invite-photo-backdrop-wrap invite-photo-backdrop-wrap--envelope" aria-hidden="true">
-          <InvitePhotoBackdrop className="invite-photo-backdrop--envelope" photos={backgroundPhotos} />
+          <InvitePhotoBackdrop
+            className="invite-photo-backdrop--envelope"
+            photos={backgroundPhotos}
+            desktopPhotos={backgroundPhotosDesktop}
+          />
         </div>
       )}
 
@@ -691,58 +582,6 @@ export const Hero: React.FC<HeroProps> = ({
                       />
                     </div>
                   </motion.div>
-
-                  {!isPlain && (
-                  <div className="env-invite-photos-emerge">
-                    {isMobileViewport
-                      ? envelopePolaroids.mobile.map((photo, index) => (
-                          <PolaroidPhoto
-                            key={`mobile-${photo.side}-${photo.src}`}
-                            side={photo.side}
-                            src={photo.src}
-                            alt={photo.side === 'left' ? `${groomName} portrait` : `${brideName} portrait`}
-                            variants={
-                              photo.side === 'left'
-                                ? mobileEnvelopePhotoLeftVariants
-                                : mobileEnvelopePhotoRightVariants
-                            }
-                            photoState={photoState}
-                            liftedPhoto={liftedPhoto}
-                            onToggle={toggleLiftedPhoto}
-                            interactive={photosInteractive}
-                            emergenceDelay={index === 0 ? 0.55 : 1.0}
-                            reduceMotion={reduceMotion}
-                            isExiting={isExiting}
-                            envelopePair
-                          />
-                        ))
-                      : envelopePolaroids.desktop.map((photo, index) => {
-                          const delays = [0.55, 1.0, 1.45, 1.7] as const;
-                          const variantsBySide: Record<PhotoSide, Variants> = {
-                            left: photoLeftVariants,
-                            center: photoCenterVariants,
-                            right: photoRightVariants,
-                            'right-inner': photoRightInnerVariants,
-                          };
-                          return (
-                            <PolaroidPhoto
-                              key={`desktop-${photo.side}-${photo.src}`}
-                              side={photo.side}
-                              src={photo.src}
-                              alt={coupleNames}
-                              variants={variantsBySide[photo.side]}
-                              photoState={photoState}
-                              liftedPhoto={liftedPhoto}
-                              onToggle={toggleLiftedPhoto}
-                              interactive={photosInteractive}
-                              emergenceDelay={delays[index] ?? 1.7}
-                              reduceMotion={reduceMotion}
-                              isExiting={isExiting}
-                            />
-                          );
-                        })}
-                  </div>
-                  )}
                 </div>
               </div>
             </div>
@@ -905,90 +744,3 @@ function wait(ms: number) {
   });
 }
 
-interface PolaroidPhotoProps {
-  side: PhotoSide;
-  src: string;
-  alt: string;
-  variants: Variants;
-  photoState: 'hidden' | 'emerge';
-  liftedPhoto: PhotoSide | null;
-  onToggle: (side: PhotoSide) => void;
-  interactive: boolean;
-  emergenceDelay: number;
-  reduceMotion: boolean | null;
-  isExiting?: boolean;
-  envelopePair?: boolean;
-}
-
-const PHOTO_EXIT_DELAY: Record<PhotoSide, number> = {
-  left: 0.06,
-  center: 0.1,
-  right: 0.04,
-  'right-inner': 0.14,
-};
-
-function PolaroidPhoto({
-  side,
-  src,
-  alt,
-  variants,
-  photoState,
-  liftedPhoto,
-  onToggle,
-  interactive,
-  emergenceDelay,
-  reduceMotion,
-  isExiting = false,
-  envelopePair = false,
-}: PolaroidPhotoProps) {
-  const canInteract = interactive && !reduceMotion && !isExiting;
-
-  const animateState = isExiting
-    ? 'exit'
-    : photoState === 'hidden'
-      ? 'hidden'
-      : liftedPhoto === side
-        ? 'lifted'
-        : 'emerge';
-
-  return (
-    <motion.button
-      type="button"
-      className={`env-invite-polaroid env-invite-polaroid--${side}${liftedPhoto === side ? ' is-lifted' : ''}${envelopePair ? ' env-invite-polaroid--envelope-pair' : ''}`}
-      variants={variants}
-      initial="hidden"
-      animate={animateState}
-      whileHover={canInteract && liftedPhoto !== side ? 'hover' : undefined}
-      whileTap={canInteract ? 'press' : undefined}
-      transition={
-        reduceMotion
-          ? { duration: 0.01 }
-          : isExiting
-            ? { duration: 0.92, ease: [0.4, 0, 0.2, 1], delay: PHOTO_EXIT_DELAY[side] }
-            : photoState === 'hidden'
-              ? { duration: 0.01 }
-              : animateState === 'emerge' && liftedPhoto === null
-                ? { ...photoEmergenceEase, delay: emergenceDelay }
-                : photoInteractEase
-      }
-      onClick={(e) => {
-        e.stopPropagation();
-        if (interactive) onToggle(side);
-      }}
-      disabled={!interactive}
-      aria-label={`View photo ${side}`}
-      aria-pressed={liftedPhoto === side}
-    >
-      <div className="env-invite-polaroid-photo">
-        <Image
-          src={src}
-          alt={alt}
-          fill
-          className="object-cover env-invite-polaroid-img"
-          sizes={envelopePair ? '(max-width: 767px) 42vw, 140px' : '(min-width: 768px) 310px, 140px'}
-          priority
-        />
-      </div>
-    </motion.button>
-  );
-}

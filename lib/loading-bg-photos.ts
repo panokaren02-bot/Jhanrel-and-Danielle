@@ -1,18 +1,19 @@
 import { siteConfig } from "@/content/site";
 
-/** Mobile invitation photo marquee — `public/mobile-background` */
-export const MOBILE_BACKGROUND_PHOTO_COUNT = 10;
-
-export const MOBILE_BACKGROUND_PHOTOS = Array.from(
-  { length: MOBILE_BACKGROUND_PHOTO_COUNT },
-  (_, index) => encodeURI(`/mobile-background/couple (${index + 1}).webp`),
-);
+const isPlain = siteConfig.loadingScreen.display === "plain";
 
 /**
  * Loader background photos for preloading — set in content/site.ts (loadingScreen.backgroundPhotos).
  * Empty in "plain" display so nothing is downloaded.
  */
-export const LOADING_BG_PHOTOS =
-  siteConfig.loadingScreen.display === "plain"
-    ? []
-    : (siteConfig.loadingScreen.backgroundPhotos ?? []).map((src) => encodeURI(src));
+export const LOADING_BG_PHOTOS = isPlain
+  ? []
+  : (siteConfig.loadingScreen.backgroundPhotos ?? []).map((src) => encodeURI(src));
+
+/** Landscape marquee photos for ≥768px — `public/desktop-background` (loadingScreen.backgroundPhotosDesktop) */
+export const LOADING_BG_PHOTOS_DESKTOP = isPlain
+  ? []
+  : (siteConfig.loadingScreen.backgroundPhotosDesktop ?? []).map((src) => encodeURI(src));
+
+/** Mobile invitation photo marquee — `public/mobile-background` */
+export const MOBILE_BACKGROUND_PHOTOS = LOADING_BG_PHOTOS;

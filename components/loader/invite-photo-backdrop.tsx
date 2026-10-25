@@ -5,6 +5,7 @@ import Image from 'next/image';
 import { useReducedMotion } from 'motion/react';
 import {
   LOADING_BG_PHOTOS,
+  LOADING_BG_PHOTOS_DESKTOP,
   MOBILE_BACKGROUND_PHOTOS,
 } from '@/lib/loading-bg-photos';
 import './loading-screen.css';
@@ -14,6 +15,25 @@ export { LOADING_BG_PHOTOS };
 export const MOBILE_BG_PHOTOS = MOBILE_BACKGROUND_PHOTOS;
 
 const MARQUEE_SAMPLE_SIZE = 24;
+const DESKTOP_QUERY = '(min-width: 768px)';
+
+/** Landscape set on desktop, portrait set on phones; falls back to mobile if no desktop set. */
+export function useResponsivePhotos(
+  mobile: readonly string[],
+  desktop?: readonly string[],
+) {
+  const [isDesktop, setIsDesktop] = useState(false);
+
+  useEffect(() => {
+    const mediaQuery = window.matchMedia(DESKTOP_QUERY);
+    const update = () => setIsDesktop(mediaQuery.matches);
+    update();
+    mediaQuery.addEventListener('change', update);
+    return () => mediaQuery.removeEventListener('change', update);
+  }, []);
+
+  return isDesktop && desktop && desktop.length > 0 ? desktop : mobile;
+}
 
 function pickRandomPhotos(photos: readonly string[], count: number) {
   const next = [...photos];
@@ -116,18 +136,24 @@ export function PhotoMarquee({
 export function InvitePhotoBackdrop({
   className = '',
   photos,
+  desktopPhotos,
 }: {
   className?: string;
   photos?: readonly string[];
+  desktopPhotos?: readonly string[];
 }) {
   const reduceMotion = useReducedMotion();
   const copies = reduceMotion ? 1 : 2;
-  const resolved =
+  const resolved = useResponsivePhotos(
     photos && photos.length > 0
       ? photos
       : LOADING_BG_PHOTOS.length > 0
         ? LOADING_BG_PHOTOS
-        : MOBILE_BG_PHOTOS;
+        : MOBILE_BG_PHOTOS,
+    desktopPhotos && desktopPhotos.length > 0
+      ? desktopPhotos
+      : LOADING_BG_PHOTOS_DESKTOP,
+  );
 
   if (resolved.length === 0) return null;
 
