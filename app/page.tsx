@@ -266,7 +266,7 @@ export default function Home() {
               >
                <Welcome />
               {/* <CoupleVideo />  */}
-              <LoveStory />
+              {/* <LoveStory /> */}
               <Countdown />
               <Gallery />
               {/* <MessageVideo /> */}
